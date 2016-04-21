@@ -1,0 +1,72 @@
+<div class="col-md-2" ng-show="success != '' || errors != ''"></div>
+<div class="text-center col-md-6 alert alert-danger" style="padding: 20px; margin-top: 50px;" ng-show="errors != ''"><h2>{{ errors }}</h2></div> 
+<div class="text-center col-md-6 alert alert-success" style="padding: 20px; margin-top: 50px;" ng-show="success != ''"><h2>{{ success }}</h2></div> 	
+<div class="col-md-11" ng-show="period && !approved">	
+	<h2>Driver: {{ period.driver }}</h2>
+	<table class='table table-bordered period-approval' style='width: 400px;'>
+		<tbody>
+			<tr>
+				<td><b>Start Date</b></td>
+				<td>{{ period.start_date | utcdatetime }}</td>
+			</tr>
+			<tr>
+				<td><b>End Date</b></td>
+				<td>{{ period.end_date | utcdatetime }}</td>
+			</tr>
+            <tr>
+                <td><b>Start Mileage</b></td>
+                <td>{{ period.start_mileage }}</td>
+            </tr>
+            <tr>
+                <td><b>End Mileage</b></td>
+                <td>{{ period.end_mileage }}</td>
+            </tr>
+			<tr>
+				<td><b>Mileage</b></td>
+                <td>Buisness: {{ period.overall_mileage.business }}<br>
+				Private: {{ period.overall_mileage.private }}</td>
+			</tr>
+			<tr ng-hide="approved">
+				<td colspan='2' style='text-align: right'>
+					<button class='btn btn-primary' ng-click="approvePeriod()">Approve Period</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+	<hr>
+	<h3>Period trips:</h3>												
+	<div class="ibox-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Driver</th>
+                    <th>Vehicle</th>
+                    <th>Start location</th>
+                    <th>End location</th>
+                    <th>Start mileage</th>
+                    <th>End mileage</th>
+                    <th>Mileage</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Time</th>
+                    <th>Status</th>    
+                </thead>
+                <tr ng-repeat='t in trips'>
+                    <td>{{ t.id }}</td>
+                    <td>{{ t.first_name }} {{ t.last_name }}</td>
+                    <td>{{ t.vehicle_reg_number }}</td>
+                    <td>{{ t.start_location }}</td>
+                    <td>{{ t.end_location }}</td>
+                    <td>{{ t.start_mileage }}</td>
+                    <td>{{ t.end_mileage }}</td>
+                    <td>{{ t.mileage }}</td>
+                    <td>{{ t.start_date | utcdatetime }}</td>
+                    <td>{{ t.end_date | utcdatetime }}</td>
+                    <td>{{ dateDiff(t.start_date, t.end_date) }}</td>
+                    <td>{{ t.status }}</td>                        
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

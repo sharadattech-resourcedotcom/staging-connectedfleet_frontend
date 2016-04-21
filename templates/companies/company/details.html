@@ -1,0 +1,31 @@
+<div class="col-md-6">
+  <div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+  <div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div>          
+  <p><b>Details</b></p>
+  <form class="form-horizontal" role="form" ng-submit="saveCompany()">
+    <div class="form-group">
+      <div class="col-sm-6">
+        <input type="text" class="form-control" ng-model="company.name" placeholder="First name" required ng-disabled="can_update == 0">
+      </div>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" ng-model="company.address" placeholder="Last name" required ng-disabled="can_update == 0">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <input type="text" class="form-control" ng-model="company.phone" placeholder="Phone" required ng-disabled="can_update == 0">
+      </div>
+    </div>
+    <div ifcan="edit companies">
+      <input type="checkbox" name="enabled_inspections" ng-model="company.enabled_inspections"> Enable inspections
+      <br>
+      <input type="checkbox" name="enable_hours_payroll" ng-model="company.enabled_hours_payroll"> Enable hours payroll
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <hr />
+        <button ifcan="edit companies" ng-click="updateCompanyDetails()" class="btn btn-primary pull-right">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

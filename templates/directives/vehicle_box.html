@@ -1,0 +1,42 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>Vehicle Details</h5>
+    </div>
+    <div>
+    	<!-- <div class="ibox-content no-padding border-left-right">
+            <img alt="image" class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Mercedes-Benz_CLS_500_BlueEFFICIENCY_Sport-Paket_AMG_(C_218)_%E2%80%93_Frontansicht,_28._Mai_2011,_D%C3%BCsseldorf.jpg">
+        </div> -->
+        <div class="ibox-content profile-content">
+        	<h4><strong>{{ vehicle.make_and_model }} ({{ vehicle.registration }})</strong></h4>
+        	<table class="table">                            
+                <tbody>
+                <tr>
+                    <td>Registration</td>
+                    <td>{{ vehicle.registration }}</td>                                
+                </tr>
+                <tr ng-show="vehicle.color">
+                    <td>Color</td>
+                    <td>{{ vehicle.color }}</td>
+                </tr>
+                <tr ng-show="vehicle.engine">
+                    <td>Engine</td>
+                    <td>{{ vehicle.engine }}</td>
+                </tr>
+                <tr ng-show="vehicle.transmission">
+                    <td>Transmission</td>
+                    <td>{{ vehicle.transmission }}</td>
+                </tr>
+                <tr ng-show="vehicle.model_year">
+                    <td>Year</td>
+                    <td>{{ vehicle.model_year }}</td>
+                </tr>
+                <tr ng-show="vehicle.fuel_type">
+                    <td>Fuel type</td>
+                    <td>{{ vehicle.fuel_type }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-white btn-sm m-t-10" ng-href="#/vehicles/{{vehicle.id}}/edit">View details</a> 
+        </div>
+    </div>
+</div>

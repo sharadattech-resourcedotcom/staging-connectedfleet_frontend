@@ -1,0 +1,36 @@
+<ul class="nav nav-tabs" ng-class="{'nav-stacked': vertical, 'nav-justified': justified}" >
+	<li class="permissions active" ifcan="grant permissions" ng-class="{active: $routeSegment.startsWith('management_panel.permissions')}">
+		<a ng-href="#management_panel/permissions">Permissions</a>
+	</li>
+	<li class="roles" ifcan="manage roles" ng-class="{active: $routeSegment.startsWith('management_panel.roles')}">
+		<a href="#management_panel/roles">Roles</a>
+	</li>
+	<li class="create_user" ifcan="create users" ng-class="{active: $routeSegment.startsWith('management_panel.create_user')}">
+		<a href="#management_panel/create_user">Create user</a>
+	</li>
+	<li class="vehicles_access" ifcan="grant permissions" ng-class="{active: $routeSegment.startsWith('management_panel.vehicles_access')}">
+		<a href="#management_panel/vehicles_access">Vehicles access</a>
+	</li>
+	<!-- <li class="settings"  ifcan="see settings" ng-class="{active: $routeSegment.startsWith('management_panel.settings')}"> -->
+	<!-- <a href="#management_panel/settings">Settings</a> -->
+	 <li class="settings menu-item dropdown dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown">Company Settings &nbsp<i class="fa fa-toggle-down"></i></a>
+		 <ul class="dropdown-menu">
+            <li class="menu-item dropdown dropdown-submenu">
+             	<a ifcan="see appointments list" href="#management_panel/settings/constants">Constants</a>
+             	<a href="#management_panel/settings/email_templates">Email templates</a>
+             	<a href="#management_panel/settings/limit_values">Limit values</a>
+             	<a href="#management_panel/settings/managers">Managers</a>
+             	<a ifcan="manage drivers types" href="#management_panel/settings/drivers_types">Drivers types</a>
+             	<a ifcan="manage sales staff" href="#management_panel/settings/sales_staff">Sales Staff</a>
+            </li>
+        </ul>
+	</li>
+
+	<li class="logs" ifcan="synchronize logs" ng-class="{active: $routeSegment.startsWith('management_panel.logs')}">
+		<a href="#management_panel/logs">Logs</a>
+	</li>
+	<li class="apps_versions" ifcan="synchronize logs" ng-class="{active: $routeSegment.startsWith('management_panel.logs')}">
+		<a ifcan="manage apps versions" href="#management_panel/apps_versions">Apps Versions</a>
+	</li>
+</ul>
+<div app-view-segment="1"></div>

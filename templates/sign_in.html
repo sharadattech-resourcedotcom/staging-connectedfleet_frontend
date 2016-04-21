@@ -1,0 +1,69 @@
+<div id="inSlider" class="carousel slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#inSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#inSlider" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>CONNECTED FLEET <span>2.0</span></h1>
+                    <h3>We are not here to compete with current providers<br/> we are here to make them obsolete</h3>
+                    <div class="animated fadeInDown">
+                        <div class="col-md-6">
+                           <div class="sk-spinner sk-spinner-chasing-dots" ng-show="isLoading">
+                                <div class="sk-dot1"></div>
+                                <div class="sk-dot2"></div>
+                            </div>
+                            <form class="m-t" role="form">
+                                <div class="alert alert-danger alert-dismissable" ng-show="error != ''">
+                                    {{ error }}
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Username" name="login" ng-model="user.login" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password" required="" name="password" ng-model="user.password">
+                                </div>
+                                
+                                <button class="btn btn-primary block full-width m-b" ng-click="signin();" ng-disabled="user.login == '' || user.password == ''">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-image wow zoomIn">
+                    <img src="images/laptop.png" alt="laptop"/>
+                </div>
+            </div>
+            <!-- Set background for slide in css -->
+            <div class="header-back one"></div>
+
+        </div>
+    </div>
+</div>
+
+
+<section id="features" class="container services">
+    <div class="row">
+        <div class="col-sm-3">
+            <i class="fa fa-car"></i>
+            <h2>Vehicle Tracking</h2>
+            <p>Vehicle and Driver “Track and Trace” provides all relevant information on the drivers location, activity, travel time and presents this real time onto your management screens</p>
+        </div>
+        <div class="col-sm-3">
+            <i class="fa fa-money"></i>
+            <h2>Drivers Payroll</h2>
+            <p>Separating business and private mileage from the ease of the Mobile App. No more daily logs to keep track of your expenses, these are automatically calculated once you close the month</p>
+        </div>
+        <div class="col-sm-3">
+            <i class="fa fa-check-square-o"></i>
+            <h2>Inspections</h2>
+            <p>A range of vehicle inspections are available, from accident and incident damage recording through to end of contract pre-inspections and VOSA daily checks</p>
+        </div>
+        <div class="col-sm-3">
+            <i class="fa fa-file-pdf-o"></i>
+            <h2>Reporting</h2>
+            <p>All data in - can become data out. Either in a format to extract to your fleet or payroll systems, or for pro-active fleet and driver management</p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,37 @@
+<div class="col-md-6">
+	<label><h2>Users permissions</h2></label><br>
+	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	<div class="panel-body" style="padding: 10px !important;">
+		<label><p>User search</p></label><br>
+		<div class="col-md-5">
+			<select id="selected_user" class="form-control" ng-model="user" ng-change="changeUser()" ng-options="user as user.full_name for user in users_list | selectedRolesFilter:selectedRoles"></select>
+		</div>
+		<div class="col-md-7">
+			<div class="col-md-5 text-left" ng-repeat="role in roles">
+				<input type="checkbox" name="searchRoles" ng-model="role.isChecked" ng-change="changeUsersFilter(role)"> {{ role.description }}s
+			</div>
+		</div>
+	</div>
+	<div class="panel-body" ng-show="user" style="padding: 10px !important;">
+		<label><p>Permissions panel</p></label><br>
+		<div class="row">
+			User role:
+			<select id="user_selected_role" class="form-control" ng-model="user.selected_role" ng-options="role as role.description for role in roles" ng-change="changeRole()"></select>
+		</div>
+		<div class="row text-left">
+			User permissions:
+		</div>
+		<div id="user_permissions_list" style="max-height: 500px; overflow: auto;" class="col-md-6" >
+			<div class="text-left" ng-repeat="p in user.selected_role.permissions">
+				<input type="checkbox" name="userPermissionsIds" ng-model="p.isChecked" ng-change="changeUserPermission(p);"> {{ p.description }}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="text-left" ng-repeat="p in user.permissions">
+				- {{ p.description }}
+			</div>
+		</div>	
+		<button type="submit" class="btn btn-primary pull-right" ng-click="sendUserPermissions(user);">Submit user permissions</button>
+	</div>
+</div>

@@ -1,0 +1,56 @@
+<div id="reports" class="reports">
+	<div class="row wrapper border-bottom white-bg page-heading one-line">
+	    <div class="col-sm-8">
+	        <h2>Reports</h2>
+	    </div>    
+	</div>
+	<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+	    <div class="white-bg search-form">
+	    	<div class="col-md-3">
+	  			<select id="selected_report" class="form-control" placeholder='Please select proper value...' ng-model="report.report_name" ng-options="report.key as report.name for report in reports_list"></select>
+	  		</div>
+	  		<div class="col-md-3" ng-hide="report.report_name == 'appVersions' || report.report_name == 'managersOfDrivers' || report.report_name == 'driversOverallSpeed' || report.report_name == 'payrollReport'">
+	  			<input ng-model="report.date_from" name="date_from" type="text" class="form-control" />
+	  		</div>
+	  		<div class="col-md-3" ng-hide="report.report_name == 'appVersions' || report.report_name == 'managersOfDrivers' || report.report_name == 'driversOverallSpeed' || report.report_name == 'payrollReport'">
+	  			<input ng-model="report.date_to" name="date_to" type="text" class="form-control"   />
+	  		</div>
+	  		<div class="col-md-3" ng-show="report.report_name == 'payrollReport'">
+	  			<input ng-model="report.date_from" name="period_date" type="text" class="form-control"/>
+	  		</div>
+	  		<div class="col-md-3">
+	    		<button class="btn btn-primary" ng-click="generateReport();">Generate</button>
+	  		</div>
+	  		<div class="clearfix"></div>
+	  		<div class="col-md-12 checkboxes" ng-show="report.report_name=='periods'">
+		  		<div class="checkbox-inline">
+		    		<label><input type="checkbox" ng-model="report.approved" name="approved" ng-change="change('approved')">Approved</label>
+		  		</div>
+		  		<div class="checkbox-inline">
+		    		<label><input type="checkbox" ng-model="report.unapproved" name"unapproved" ng-change="change('unapproved')">Unapproved</label>
+		  		</div>
+		  		<div class="checkbox-inline">
+		    		<label><input type="checkbox" ng-model="report.opened" ng-disabled="!report.unapproved" name"opened" ng-change="change('opened')">Opened</label>
+		  		</div>
+		  		<div class="checkbox-inline">
+		    		<label><input type="checkbox" ng-model="report.closed" ng-disabled="!report.unapproved" name"closed" ng-change="change('closed')">Closed</label>
+		  		</div>
+	  		</div>
+	  		<div class="col-md-12" ng-show="report.report_name=='topBehaviourReport'">
+	  			<div class="col-md-3">
+	  				<label>Sort by:</label>
+		  			<select id="selected_sort" class="form-control" ng-model="presortBy" ng-options="sort.name as sort.name for sort in sortOptions"></select>
+		  		</div>
+		  		<div class="col-md-3">
+		  			<label>Run:</label>
+		  			<select id="selected_sort" class="form-control" ng-model="topTen" ng-options="top.value as top.name for top in topOptions"></select>
+		  		</div>
+	  		</div>
+	  		<div class="clearfix"></div>
+	    </div>
+	</div>	
+    <hr>
+	<div class="col-md-12" id="report-output">
+		<div app-view-segment="1"></div>
+	</div>
+</div>

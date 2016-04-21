@@ -1,0 +1,97 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>Vehicles</h2>
+        <ol class="breadcrumb">
+	        <li>
+	            <a href="#/vehicles">List</a>
+	        </li>
+	        <li>
+	            Create New
+	        </li>
+	    </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content" ifcan="create vehicles">
+    <div class="row animated fadeInRight">
+	    <div class="ibox float-e-margins" ng-show="vehicle != null">                        
+		    <div class="ibox-content">
+		        <form method="get" class="form-horizontal">
+		        	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+					<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+					<div class="clearfix"></div>					
+					<div class="form-group">
+		            	<label class="col-sm-2 control-label">Manufacturer<font color="FireBrick">*</font></label>
+		                <div class="col-sm-10">
+		                	<select id="selected_manufacturer" class="form-control" ng-model="vehicle.manufacturer_id" ng-options="manufacturer.id as manufacturer.description for manufacturer in vehiclePreData.manufacturers" requiered></select>
+		                	<p class="m-t-10">If you do not see the manufacturer on a above list, you can type its name below:</p>
+		                	<input type="text" ng-model="vehicle.manufacturer_text" class="form-control" placeholder="Manufacturer Name"/>
+
+		                	<span class="help-block m-b-none">
+		                		<i>Please remember that once the vehicle is created, you will not be able to change manufacturer and model</i>
+		                	</span>
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>   
+		            <div class="form-group">
+		            	<label class="col-sm-2 control-label">Model<font color="FireBrick">*</font></label>
+		                <div class="col-sm-10">
+		                	<select id="selected_fleet" class="form-control" ng-model="vehicle.model_id" ng-options="model.id as model.description for model in vehiclePreData.model | filter: {manufacturer_id: vehicle.manufacturer_id}" requiered></select>
+		                	<p class="m-t-10">If you do not see the model on a above list, you can type its name below:</p>
+		                	<input type="text" ng-model="vehicle.model_text" class="form-control" placeholder="Model Name"/>
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>   
+		            <div class="form-group">
+		            	<label class="col-sm-2 control-label">Registration<font color="FireBrick">*</font></label>
+		                <div class="col-sm-10">
+		                	<input type="text" class="form-control" name="registration" ng-model="vehicle.registration">
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>            
+		            <div class="form-group">
+		            	<label class="col-sm-2 control-label">Color</label>
+		                <div class="col-sm-10">
+		                	<input type="text" class="form-control" name="engine" ng-model="vehicle.color" >
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>            
+		            <div class="form-group">
+		            	<label class="col-sm-2 control-label">Engine</label>
+		                <div class="col-sm-10">
+		                	<input type="text" class="form-control" name="engine" ng-model="vehicle.engine" >
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>
+		            <div class="form-group">
+		            	<label class="col-sm-2 control-label">Transmission</label>
+		                <div class="col-sm-10">
+		                	 <select id="selected_transmission" class="form-control" ng-model="vehicle.transmission" ng-options="transmission as transmission for transmission in vehiclePreData.transmissions"></select>
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>
+		            <div class="form-group">
+		            	<label class="col-sm-2 control-label">Model year</label>
+		                <div class="col-sm-10">
+		                	<input type="number" class="form-control" name="model_year" ng-model="vehicle.model_year" />
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>
+		            <div class="form-group">
+		            	<label class="col-sm-2 control-label">Fuel type</label>
+		                <div class="col-sm-10">
+		                	<select id="selected_fuel" class="form-control" ng-model="vehicle.fuel_type" ng-options="fuel_type as fuel_type for fuel_type in vehiclePreData.fuel_types"></select>
+		                </div>
+		            </div>
+		            <div class="hr-line-dashed"></div>
+		            <div class="form-group">
+		                <div class="col-sm-4 col-sm-offset-2">
+		                    <a class="btn btn-white" ng-href="#/vehicles">Cancel</a>
+		                    <button class="btn btn-primary" ng-click="saveVehicle();">Add</button>
+		                </div>
+		            </div>
+		        </form>
+		    </div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,34 @@
+	<div class="col-md-6 no-padding">
+		<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+		<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 	
+		<div class="col-md-12 no-padding">
+			<h3>Speed lines values</h3>
+			<div class="col-md-6">
+				<label>Red line value [mph] :</label>
+				<input ng-model="lines_values.redValue" name="redValue" type="number" class="form-control" />
+			</div>
+			<div class="col-md-6">
+				<label>Orange line value [mph] :</label>
+				<input ng-model="lines_values.orangeValue" name="orangeValue" type="number" class="form-control" />				
+			</div>
+			<h3>RPM Behaviour Points</h3>
+			<div class="col-md-6">
+				<label>Point for every 100RPM over limit:</label>
+				<input ng-model="lines_values.rpm_points" name="redValue" type="number" class="form-control" />
+			</div>
+			<div class="col-md-6">
+				<label>RPM Limit:</label>
+				<input ng-model="lines_values.rpm_limit" name="orangeValue" type="number" class="form-control" />				
+			</div>
+			<h3>MPG Behaviour Points</h3>
+			<div class="col-md-6">
+				<label>Point for every 1mpg over limit:</label>
+				<input ng-model="lines_values.fuel_points" name="redValue" type="number" class="form-control" />
+			</div>
+			<div class="col-md-6">
+				<label>MPG Limit:</label>
+				<input ng-model="lines_values.fuel_limit" name="orangeValue" type="number" class="form-control" />				
+			</div>
+			<button class="btn btn-primary pull-right" style="margin-top: 10px" ng-click="updateLinesValues();">Submit</button>
+		</div>
+	</div>

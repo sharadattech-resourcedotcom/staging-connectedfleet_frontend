@@ -1,0 +1,40 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>Vehicles</h2>
+        <ol class="breadcrumb">
+	        <li>
+	            <a href="#/vehicles">List</a>
+	        </li>
+	        <li>
+	            {{ vehicle.make_and_model }} ({{ vehicle.registration }})
+	        </li>
+	    </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-md-4">
+            <vehicle vehicle="vehicle"></vehicle>
+        </div>
+        <div class="col-md-8">
+        	<div class="tabs-container">
+                <ul class="nav nav-tabs">
+                	<!-- <li ng-class="getClass('/details')"><a ng-href="#/vehicles/{{ vehicle.id }}/details">Overview</a></li> -->
+                	<li ifcan="update vehicles" ng-class="getClass('/edit')"><a ng-href="#/vehicles/{{ vehicle.id }}/edit">Edit</a></li>
+                    <li ifcant="update vehicles" ng-class="getClass('/edit')"><a ng-href="#/vehicles/{{ vehicle.id }}/details">Details</a></li>
+                	<li ifcan="see inspections" ng-class="getClass('/inspections')"><a ng-href="#/vehicles/{{ vehicle.id }}/inspections">Inspections</a></li>
+                	<li ifcan="see appointments" ng-class="getClass('/appointments')"><a ng-href="#/vehicles/{{ vehicle.id }}/appointments">Appointments</a></li>
+                   <!--  <li ng-class="getClass('/activities')"><a >Activities</a></li> -->
+                </ul>
+            </div>
+
+            <div class="ibox float-e-margins">                        
+                <div class="ibox-content">
+                    <div app-view-segment="1"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

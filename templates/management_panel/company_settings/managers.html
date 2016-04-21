@@ -1,0 +1,15 @@
+<div class="col-md-6">
+	<div class="col-md-8 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-8 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	<div class="col-md-8">
+		<label class="text-left col-md-12">Choose Driver</label>
+		<select id="driver" class="form-control" ng-model="driver" ng-change="changeDriver();" ng-options="driver as driver.full_name for driver in drivers"></select>
+		<hr>
+		<div ng-show="driver != null">
+			<label class="text-left col-md-12">Choose Manager</label>
+			<select id="manager" class="form-control" ng-model="manager_id" ng-options="manager.id as manager.full_name for manager in filteredManagers"></select>
+	    	<hr>
+	    	<button class="btn btn-primary pull-right" ng-click="assign();">Submit</button>
+		</div>
+	</div>
+</div>

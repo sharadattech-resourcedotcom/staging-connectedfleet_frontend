@@ -1,0 +1,28 @@
+<div class="ibox float-e-margins" >
+    <div class="ibox-title">
+        <h5>Driver Details</h5>
+    </div>
+    <div>
+    	<div class="ibox-content image-content no-padding border-left-right">
+    		<div class="avatar pull-left"><i class="fa fa-user"></i></div>
+    		<h4 class="pull-left">{{ driver.full_name }}</h4>
+            <div class="pull-right" style="margin-right: 10px" ng-show="driver.status">
+                <i class="fa fa-info-circle"></i>  {{ driver.status }}
+            </div>
+    		<div class="clearfix"></div>
+        </div>
+        <div class="ibox-content profile-content">
+        	<div class="col-lg-12 no-padding" ng-show="driver.phone">
+        		<i class="fa fa-phone"></i> {{ driver.phone }}
+        	</div>
+        	<div class="col-lg-12 no-padding" ng-show="driver.email">
+        		<i class="fa fa-envelope-o"></i> {{ driver.email }}
+        	</div>
+            <hr>
+            <a class="btn btn-white btn-sm m-t-10" ng-if="$parent.location.path().indexOf('/drivers/'+driver.id+'/') == -1" ng-href="#/drivers/{{driver.id}}/currentPeriod">View details {{$parent.location.path()}}</a>
+        	<!-- <a class="btn btn-white btn-sm m-t-10">Send Message</a> -->
+        </div>
+    </div>
+</div>
+
+

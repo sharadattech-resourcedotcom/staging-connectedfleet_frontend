@@ -1,0 +1,79 @@
+<div class="modal" syle="position: fixed;" id="damageModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog ">
+		<div class="modal-content" id="modal-content" >
+			<div class="modal-body">
+				<table calss="table table-bordered">
+					<tr>
+						<p>
+							<label>Damage description:</label>
+							{{clickedCollection.description}}
+						</p>
+					</tr>
+					<tr ng-repeat="damage in clickedCollection.damage_items">
+						<td>
+							<div style="padding: 10px; margin-left: 100px" >
+								<img width="300" height="300" src="{{imgsrc + damage.file_path}}" />
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+<canvas id="exterior"></canvas>
+<canvas id="interior"></canvas>
+<hr>
+<table class="table table-bordered">
+	<tr ng-repeat="collection in collections">
+		<td>
+			<div ng-if="collection.collection_type != 'TYRES'">
+				<label>Description:&nbsp&nbsp</label>{{collection.description}}
+			</div>
+		</td>
+		<td>
+			<div ng-if="collection.collection_type != 'TYRES'">
+				<div ng-repeat="damage in collection.damage_items">
+					<img class="col-md-5" width="300" height="300" src="{{imgsrc + damage.file_path}}" />
+				</div>
+				<div ng-if="collection.damage_items.length == 0">
+					<p>No photo available.</p>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
+<h4> Tread Depths </h4><br>
+<table>
+	<tr>
+		<td colspan="3">
+			<label style="margin-left:45%">Spare [mm]</label><br>
+			<input class="col-md-1" style="margin-left:46%" type="text" ng-model="tyresCollection.spare" disabled></td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label class="pull-right">Driver Back [mm]</label><br>
+			<input class="col-md-3 pull-right" type="text" ng-model="tyresCollection.driver_back" disabled>
+		</td>
+		<td rowspan="2">
+			<img src="{{tyresCrossPath}}"/>
+		</td>
+		<td>
+			<label class="pull-left">Passenger Back [mm]</label><br>
+			<input class="col-md-3 pull-left" type="text" ng-model="tyresCollection.passenger_back" disabled>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label class="pull-right">Driver Front [mm]</label><br>
+			<input class="col-md-3 pull-right" type="text" ng-model="tyresCollection.driver_front" disabled>
+		</td>
+		<td>
+			<label class="pull-left">Passnager Front [mm]</label><br>
+			<input class="col-md-3 pull-left" type="text" ng-model="tyresCollection.passenger_front" disabled>
+		</td>
+	</tr>
+</table>

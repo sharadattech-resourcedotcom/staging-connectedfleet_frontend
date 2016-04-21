@@ -1,0 +1,22 @@
+{
+  "name": "Connected fleet frontend",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-sanitize": "latest",
+    "angular-bootstrap": "0.14.3",
+    "bootstrap": "latest",
+    "satellizer": "latest",
+    "lodash": "latest",
+    "moment": "latest",
+    "angular-route-segment": "latest",
+    "underscore": "latest",
+    "angular-filter": "latest",
+    "angular-chart.js": "latest",
+    "angular-utils-pagination": "latest",
+    "angular-file-upload": "latest",
+    "cryptojslib": "latest"
+  }
+}

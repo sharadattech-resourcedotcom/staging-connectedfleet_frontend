@@ -1,0 +1,39 @@
+<!-- <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>Drivers</h2>
+        <ol class="breadcrumb">
+	        <li>
+	            <a href="#/drivers/list">List</a>
+	        </li>
+	        <li>
+	            {{ driver.first_name }} {{ driver.last_name }} 
+	        </li>
+	    </ol>
+    </div> -->
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-md-3 driver-details">
+            <driver driver="driver"></driver>
+        </div>
+        <div class="col-md-9">
+        	<div class="tabs-container">
+                <ul class="nav nav-tabs">
+                	<li ng-class="getClass('/edit')"><a ng-href="#/drivers/{{ driver.id }}/edit">Edit</a></li>
+                	<li ifcan="see driver trips list" ng-class="getClass('/current')"><a ng-href="#/drivers/{{ driver.id }}/currentPeriod">Current Period</a></li>
+                	<li ifcan="see driver trips list" ng-class="getClass('/previous')"><a ng-href="#/drivers/{{ driver.id }}/previousPeriods">Previous Periods</a></li>
+                	<li ifcan="see driver trips list" ng-class="getClass('/trips')"><a ng-href="#/drivers/{{ driver.id }}/trips">Trips</a></li>
+                	<li ifcan="see inspections" ng-class="getClass('/inspections')"><a ng-href="#/drivers/{{ driver.id }}/inspections">Inspections</a></li>
+                </ul>
+            </div>
+
+            <div class="ibox float-e-margins">                        
+                <div class="ibox-content">
+                    <div app-view-segment="2"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

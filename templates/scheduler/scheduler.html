@@ -1,0 +1,80 @@
+<div class="row wrapper border-bottom white-bg page-heading one-line">
+    <div class="col-sm-8">
+        <h2>Scheduler</h2>
+    </div>
+</div>
+
+<div id="scheduler" class="row">
+    <div class="left-column">
+        <div class="col col-md-12 header">
+            <div class="input-group">
+                <input type="text" class="form-control" id="mainDate" name='date' datetime="dd-MM-yyyy" ng-model='mainDate'>
+                <span class="input-group-btn">
+                    <button ng-click="fetchSchedulerDataForDate()" type="button" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="col col-md-12 tab-buttons" style="padding: 0px;">
+            <div class="col-md-12 tab-drivers" ng-class="{active: currentTab == 'drivers'}" ng-click="currentTab = 'drivers'">Drivers</div>
+            <div ng-if="false" class="col-md-6 tab-route-map" ng-class="{active: currentTab == 'route_map'}" ng-click="currentTab = 'route_map'">Route Map</div>
+        </div>
+        <div class="scrollable-container drivers-summary col-md-12 no-padding" style="overflow: auto;">
+            <div class="col-md-12 no-padding content" style="padding: 0px;">                
+                <ul class="list-group elements-list" ng-show="currentTab == 'drivers'">
+                    <li class="list-group-item" ng-repeat="d in drivers_summary">
+                        <small class="pull-right text-muted">{{ d.last_sync_formatted }}</small>
+                        <a ng-click="showDriverJobs(d)"><b>{{ d.full_name }}</b></a>
+                        <div class="small m-t-xs" ng-show="d.status != null">
+                            <p class="m-b-none">{{ d.status }}</p>
+                        </div>
+                    </li>
+                </ul>
+              <!-- render partial: "route_map" %> -->
+            </div>
+        </div>
+    </div>
+    <div class="right-column">
+          <div app-view-segment="1"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+
+<div class="modal fade" id="driverModal" tabindex="-1">
+  <div class="modal-dialog modal-lg" style="width: 70%">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ driverDetails.full_name }} Jobs</h4>
+      </div>
+      <div class="modal-body" style="overflow:hidden">          
+        <div class="col-md-12" style="overflow:hidden; margin-top: 10px;">
+            <table class="table table-hover">
+                <thead class="jobs-header">
+                    <th>Appointment</th>
+                    <th>Number</th>
+                    <th>Vehicle</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Address</th>
+                </thead>
+              <tbody ng-repeat="j in driverJobs">               
+                <tr>
+                  <td>{{ j.appointment_info.description }}</td>
+                  <td>{{ j.number }}</td>
+                  <td>{{ j.appointment_info.vehicle }}</td>
+                  <td>{{ j.start_date | utcdatetime }}</td>
+                  <td>{{ j.start_date | utcdatetime }}</td>
+                  <td>{{j.appointment_info.address}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>            
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,71 @@
+<div class="col-md-6">
+	<label><h2>Roles</h2></label><br>
+	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	<button type="submit" class="btn btn-primary pull-right" style="margin-bottom: 10px" ng-click="createRoleModal();">Create role</button>
+	<select id="selected_role" class="form-control" ng-model="role" ng-options="role as role.description for role in roles" ng-change="changeRole(role)"></select>
+	<label>Access level</label><br>
+		<div class="row">
+			<div class="col-md-1">
+				<input type="text" only-digits maxlength="1" class="form-control" name="role_access_level" ng-model="role.access_level" >
+			</div>
+		</div>
+	<label class="text-right col-md-8"><p>Role permissions</p></label>
+	<div class="row">
+		<div class="input-group col-md-6">
+			<input type="text-left" class="form-control" name="search" ng-model="searchText" />
+			<span class="input-group-btn">
+				<button class="btn btn-primary " ng-click="search();">Search</button>
+			</span> 
+		</div>
+	</div>
+	<div id="list" style="max-height: 400px; overflow: auto;" class="col-md-6" >
+		<div class="text-left" ng-repeat="p in permissions | filter:filter">
+			<input type="checkbox" name="permissionsIds" ng-model="p.isChecked" ng-change="changeRolePermission(p,false)"> {{ p.description }}
+		</div>
+	</div>
+	 <div class="col-md-6">
+		<div class="text-left" ng-repeat="p in role.permissions">
+			- {{ p.description }}
+		</div>
+	</div>	
+	<button type="submit" class="btn btn-primary pull-right" ng-click="submitPermissions();">Submit all roles</button>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" style="width:50%">
+<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title" id="myModalLabel">Create role</h4>
+	</div>
+	<div class="modal-body">
+		<div class="col-md-12">
+			<label>Role decription</label>
+			<input type="text" class="form-control" name="new_role_description" ng-model="new_role.description" >
+			<label>Access level</label><br>
+			<div class="row">
+				<div class="col-md-1">
+					<input type="text" only-digits maxlength="1" class="form-control" name="new_role_access_level" ng-model="new_role.access_level" >
+				</div>
+			</div>
+			<hr />
+			<label>Permissions</label>
+			<div class="row">
+				<div id="list" style="max-height: 300px; overflow: auto;" class="col-md-6" >
+					<div class="text-left" ng-repeat="p in new_role_permissions | filter:filter">
+						<input type="checkbox" name="new_role_permissionsIds" ng-model="p.isChecked" ng-change="changeRolePermission(p, true)"> {{ p.description }}
+					</div>
+				</div>
+			 	<div class="col-md-6">
+					<div class="text-left" ng-repeat="p in new_role.permissions">
+					- {{ p.description }}
+					</div>
+				</div>	
+			</div>
+			<hr />
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" ng-click='sendNewRole();'>Create</button>
+		</div>
+	</div>
+</div>

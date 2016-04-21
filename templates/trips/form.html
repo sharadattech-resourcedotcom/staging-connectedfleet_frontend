@@ -1,0 +1,108 @@
+<table class='table table-bordered'>
+	<tr><td colspan='3'><b>Previous trip</b></td></tr>
+	<tr>
+		<td>{{ trip.prev.start_date | utcdatetime }}<br/>{{ trip.prev.end_date | utcdatetime }}</td>
+		<td>{{ trip.prev.start_mileage }}</td>
+		<td>{{ trip.prev.end_mileage }}</td>
+	</tr>
+	<tr><td colspan='3'><b>Next trip</b></td></tr>
+	<tr>
+		<td>{{ trip.next.start_date | utcdatetime }}<br/>{{ trip.next.end_date | utcdatetime }}</td>
+		<td>{{ trip.next.start_mileage }}</td>
+		<td>{{ trip.next.end_mileage }}</td>
+	</tr>
+</table>
+<a ng-href="#/drivers/{{trip.user_id}}/currentPeriod"><button type="button" class="btn btn-primary pull-right" >Driver trips</button></a>
+<label><h3>Trip details</h3></label>
+<form class="form-horizontal" role="form" ng-submit="updateTrip()">
+	<div class="form-group">
+		<div class="col-sm-12">
+			<label>Start location</label>
+			<input type="text" class="form-control" ng-model="trip.start_location" placeholder="Start location" ng-disabled="can_update == 0">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-12">
+			<label>End location</label>
+			<input type="text" class="form-control" ng-model="trip.end_location" placeholder="End location" ng-disabled="can_update == 0">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+			<label>Start mileage</label>
+			<input type="text" class="form-control" ng-model="trip.start_mileage" placeholder="Start mileage" ng-disabled="can_update == 0">
+		</div>
+		<div class="col-sm-6">
+			<label>End mileage</label>
+			<input type="text" class="form-control" ng-model="trip.end_mileage" placeholder="End mileage" ng-disabled="can_update == 0">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+			<label>Start date</label>
+			<input name="start_date" type="text" class="form-control" ng-model="trip.start_date" placeholder="Start date" ng-disabled="can_update == 0">
+		</div>
+		<div class="col-sm-6">
+			<label>End date</label>
+			<input name="end_date" type="text" class="form-control" ng-model="trip.end_date" placeholder="End date" ng-disabled="can_update == 0">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+			<label>Start latitude</label>
+			<input type="number" step="any" class="form-control" ng-model="trip.start_lat" placeholder="Starting latitude" ng-disabled="can_update == 0">
+		</div>
+		<div class="col-sm-6">
+			<label>Start longitude</label>
+			<input type="number" step="any" class="form-control" ng-model="trip.start_lon" placeholder="Starting longitude" ng-disabled="can_update == 0">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+			<label>End latitude</label>
+			<input type="number" step="any" class="form-control" ng-model="trip.end_lat" placeholder="Ending latitude" ng-disabled="can_update == 0">
+		</div>
+		<div class="col-sm-6">
+			<label>End longitude</label>
+			<input type="number" step="any" class="form-control" ng-model="trip.end_lon" placeholder="Ending longitude" ng-disabled="can_update == 0">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+			<label>Status</label>
+			<select class="form-control" ng-model="trip.status" ng-options="status as status for status in statuses" ng-disabled="can_change_status == 0" ></select>
+		</div>
+		<div class="col-sm-6">
+			<label>Duration</label>
+			<input type="text" class="form-control" ng-model="trip.time" placeholder="Time" readonly>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-12">
+			<label>Reason</label>
+			<input type="text" class="form-control" ng-model="trip.reason" placeholder="Reason of the trip" ng-disabled="can_update == 0">
+		</div>
+	</div>
+		<div class="form-group">
+		<div class="col-sm-12">
+			<label>Vehicle registration</label>
+			<input type="text" class="form-control" ng-model="trip.vehicle_reg_number" placeholder="Vehicle registration" ng-disabled="can_update == 0">
+		</div>
+	</div>
+	<div ifcan="update trips details" class="form-group">
+		<div class="col-sm-12">
+			<div id="msg"></div>
+			<hr />
+			<button type="submit" class="btn btn-primary pull-right">Save</button>
+			<button type="button" class="btn btn-primary pull-left" ng-click="resetTripForm()">Reset</button>
+		</div>
+	</div>
+	<div class="col-md-6" ifcan="move trip">
+		<hr>
+		<label>Move trip to period starts at:</label>
+		<div class="input-group">
+            <select class="form-control" ng-change="changeSelectedPeriod(selectedPeriodId)" ng-model="selectedPeriodId" ng-options="period.id as (period.start_date | utcdatetime) for period in lastPeriods"></select>
+            <span class="input-group-btn"> <button type="button" class="btn btn-primary pull-right" ng-click="moveTrip()" ng-disabled="!selectedPeriodId">Move trip</button></span>
+        </div>
+	</div>
+</form>	

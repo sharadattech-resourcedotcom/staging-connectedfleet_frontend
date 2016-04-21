@@ -1,0 +1,52 @@
+<div ng-show="loader" class="sk-spinner sk-spinner-chasing-dots" >
+	<div class="sk-dot1"></div>
+	<div class="sk-dot2"></div>
+</div>
+<div class="animated fadeInRight ecommerce" ng-show="values != null">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title search-title">
+            <h5>Records found: {{totalRecords}}</h5>       
+            <div class="col-sm-4 pull-right no-padding">
+                <a class="btn btn-primary pull-right" href="{{ download_path }}"><i class="fa fa-file-excel-o"></i> DOWNLOAD</a>
+            </div>
+        </div>              
+
+        <div class="ibox-content">
+            <div class="table-responsive">            	
+				 <table class="table table-striped table-hover" style="margin-top: 15px;">
+					<thead>
+						<tr>
+							<th ng-repeat="c in columns track by $index">
+								<a ng-click="sortingDirection = !sortingDirection; sortedBy=$index; sortValues($index, sortingDirection);">
+									{{ c }}
+								</a>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr dir-paginate='value in page | itemsPerPage: pageSize' total-items="totalRecords" current-page="currentPage">
+							<td ng-repeat="v in value track by $index">
+								<div ng-show="report.report_name == 'behaviourReport'">
+									<div ng-show="$index == 7">
+										<span ng-show="v == '.'">-</span>
+										<span ng-show="v == '+'" style="color: green"><i class="fa fa-check-circle"></i></span>
+										<span ng-show="v == '-'" style="color: red"><i class="fa fa-times-circle"></i></span>
+									</div>
+									<div ng-show="$index < 7">{{ v }}</div>
+								</div>
+								<div ng-show="!(report.report_name == 'behaviourReport')">
+									<a ng-show="$index == 0 && report.report_name == 'trips'" href="#/trips/{{ v }}">{{ v }}</a>
+									<a ng-show="$index == 0 && report.report_name == 'periods'" href="#/drivers/{{users[$index]}}/previousPeriods/{{v}}">{{ v }}</a>
+									<div ng-show="$index != 0 || (report.report_name != 'trips' && report.report_name != 'periods')">{{ v }}</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table> 
+			</div>
+			<div class="text-center">
+	            <dir-pagination-controls boundary-links="true" ng-click="scrollUp();" on-page-change="changePage(newPageNumber)" template-url="/bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+	        </div>
+		</div>
+	</div>
+</div>

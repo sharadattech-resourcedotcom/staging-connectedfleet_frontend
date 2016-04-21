@@ -1,0 +1,28 @@
+<div class="col-md-6">
+	<label><h2>Vehicles access</h2></label><br>
+	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	<hr>
+	<label>Select user</label>
+	<select id="selected_user" class="form-control" ng-model="user_id" ng-options="user.id as user.full_name for user in users" ng-change="changeUser()"></select>
+	<div ng-show="user_id > 0">
+		<hr>
+		<div class="col-md-6">
+			<label>Company vehicles</label>
+			<div id="available_vehicles_list" style="height: 300px; overflow: auto;">
+				<div class="text-left" ng-repeat="v in available_vehicles">
+					<i ng-click="addToUser(v)" class="fa fa-plus-circle"></i> {{ v.make_and_model + ' (' + v.registration +')' }}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<label>User vehicles</label>
+			<div id="user_vehicles_list" style="height: 300px; overflow: auto;">
+				<div class="text-left" ng-repeat="v in user_vehicles">
+					<i ng-click="removeFromUser(v)" class="fa fa-minus-circle"></i> {{ v.make_and_model + ' (' + v.registration +')' }}
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-primary pull-right" style="margin-top: 10px" ng-click="saveUserVehicles();">Submit</button>
+	</div>
+</div>

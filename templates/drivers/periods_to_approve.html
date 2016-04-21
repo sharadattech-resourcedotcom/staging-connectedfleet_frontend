@@ -1,0 +1,23 @@
+<div class="periods-list">
+  <table class="table table-striped table-hover">
+    <thead>
+      <th>Driver</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Start mileage</th>
+      <th>End mileage</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </thead>
+
+    <tr ng-repeat='p in periods' >
+      <td>{{ p.driver }}
+      <td>{{ p.start_date | utcdatetime }}</td>
+      <td>{{ p.end_date | utcdatetime }}</td>
+      <td>{{ p.start_mileage }}</td>
+      <td>{{ p.end_mileage }}</td>
+      <td>{{ p.status }}</td>
+      <td><a ng-href="#/drivers/{{p.user_id}}/previousPeriods/{{p.id}}"><i class="fa fa-edit"></i></a></td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,30 @@
+<div class="col-md-6">
+	<label><h2>Sales staff reporting</h2></label><br>
+	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	<hr>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<label>Reports send to:</label>
+			<input type="text" class="form-control" name="email_recipients" ng-model="email.recipients">
+		</div>
+	</div><br><br>
+	<hr>
+	<div class="col-md-6">
+		<label>Company users</label>
+		<div id="available_users_list" style="height: 300px; overflow: auto;">
+			<div class="text-left" ng-repeat="u in available_users">
+				<i ng-click="addToStaff(u)" class="fa fa-plus-circle"></i> {{ u.full_name }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<label>Sales Staff</label>
+		<div id="staff_users_list" style="height: 300px; overflow: auto;">
+			<div class="text-left" ng-repeat="u in staff_users">
+				<i ng-click="removeFromStaff(u)" class="fa fa-minus-circle"></i> {{ u.full_name }}
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-primary pull-right" style="margin-top: 10px" ng-click="saveStaffUsers();">Submit</button>
+</div>

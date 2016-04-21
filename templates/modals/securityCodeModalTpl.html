@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title">Generate security code</h3>
+</div>
+<div class="modal-body">
+   <label>Please provide value for security code:</label>
+    <center><input type='text' style="margin:10px;" onlyDigits ng-model="securityCodeSalt" /></center>
+    <div ng-show="generatedSecurityCode">
+        <label>Generated Code:</label>
+        <p><center><h1>{{ generatedSecurityCode }}</h1></center></p>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="cancel()" class="btn pull-left">Close</button>
+    <button type="button" ng-click="generateSecurityCode()" class="btn btn-primary">Generate</button>
+</div>

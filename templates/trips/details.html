@@ -1,0 +1,156 @@
+<div id="trips-details">
+	<div class="no-padding left col-md-6">
+		<ul ng-hide="loader" class="nav nav-tabs" id="nav-tabs">
+			<li role="presentation" ng-class="{'active': activeTab == 'map'}"><a ng-click="activeTab = 'map'; checkPoints();"  aria-controls="home" role="tab" data-toggle="tab">Map</a></li>
+			<li role="presentation" ng-show="trip.stats_gen" ng-class="{'active': activeTab == 'charts'}"><a ng-click="activeTab = 'charts'; getChartData()"  aria-controls="profile" role="tab" data-toggle="tab">Charts</a></li>
+		</ul>
+		<div ng-hide="loader" class="cont">
+			<div id="googleMap" style="width:100%; height: 100%" ng-show="activeTab == 'map' && !loader" ></div>
+			<div ng-show="activeTab == 'charts'" class="charts-cont">
+				<div class="col-md-12 no-padding">
+					<div class="col-md-3">
+						<p class="avg-label">Avg. data for every:</p>
+					</div>
+					<div class="col-md-3">						
+						<select class="form-control" ng-model="chartOpts.fraction" ng-change="getChartData()" ng-options="f as f + ' minutes' for f in fractions"></select>
+					</div>
+					<div class="col-md-6">
+						<label><input ng-model="chartOpts.fuel" ng-value="true" ng-change="getChartData()" type="checkbox"> Fuel</label>
+						<label><input ng-model="chartOpts.speed" ng-value="true" ng-change="getChartData()" type="checkbox"> Speed</label>
+						<label><input ng-model="chartOpts.rpm" ng-value="true" ng-change="getChartData()" type="checkbox"> RPM</label>
+					</div>
+				</div>
+				<canvas id="line" class="chart chart-line" chart-data="chart.data"
+				  chart-labels="chart.labels" chart-legend="true" chart-series="chart.series"
+				  chart-click="onClick" chart-colours="colors">
+				</canvas> 
+			</div>
+		</div>
+		<div ng-show="loader" style="margin-top: 200px; padding: 50px;" class="sk-spinner sk-spinner-chasing-dots" >
+			<div class="sk-dot1"></div>
+			<div class="sk-dot2"></div>
+		</div>
+	</div>
+	<div class="col-md-6 no-padding right">
+		<ul class="nav nav-tabs" id="nav-tabs">
+			<li role="presentation" ng-class="{'active': activeRightTab == 'general'}"><a ng-click="activeRightTab = 'general';"  aria-controls="home" role="tab" data-toggle="tab">Statistics</a></li>
+			<li role="presentation" ng-class="{'active': activeRightTab == 'edit'}" ifcan="update trips details"><a ng-click="activeRightTab = 'edit';"  aria-controls="home" role="tab" data-toggle="tab">Edit Trip</a></li>
+			<li role="presentation" ng-class="{'active': activeRightTab == 'points'}"><a ng-click="activeRightTab = 'points'; checkPoints();"  aria-controls="profile" role="tab" data-toggle="tab">Points</a></li>
+			<button ifcan="delete trips" type="button" ng-click="deleteTrip()" class="btn btn-danger btn-sm pull-right">Delete trip</button>
+		</ul>
+		<div class="cont">
+			<div ng-show="activeRightTab == 'general'">
+				<table ng-show="trip.status == 'finished'" class="table table-bordered">					
+					<tr>
+						<td>Avg. Vehicle Speed</td>
+						<td ng-if="stats.speed_avg">{{ stats.speed_avg / 1.609 | number:0 }} mph</td>
+						<td ng-if="!stats.speed_avg">Not calculated</td>
+					</tr>
+					<tr>
+						<td>Max. Vehicle Speed</td>
+						<td ng-if="stats.speed_max ">{{ stats.speed_max / 1.609 | number:0 }} mph</td>
+						<td ng-if="!stats.speed_max ">Not calculated</td>
+					</tr>
+					<tr>
+						<td>Avg. Acceleration</td>
+						<td ng-if="stats.acc_avg">{{ stats.acc_avg }}</td>
+						<td ng-if="!stats.acc_avg">Not calculated</td>
+					</tr>
+					<tr>
+						<td>Avg. RPM</td>
+						<td ng-if="stats.rpm_avg">{{ stats.rpm_avg | number:0 }} RPM</td>
+						<td ng-if="!stats.rpm_avg">Not calculated</td>
+					</tr>
+					<tr>
+						<td>Avg. MPG</td>
+						<td ng-if="stats.fuel_avg_in_mpg">{{ stats.fuel_avg_in_mpg | number:2 }} MPG</td>
+						<td ng-if="!stats.fuel_avg_in_mpg">Not calculated</td>
+					</tr>
+					<tr>
+						<td>Behaviour Points</td>
+						<td ng-if="stats.behaviour_points">{{ stats.behaviour_points }}</td>
+						<td ng-if="!stats.behaviour_points">Not calculated</td>
+					</tr>
+					<tr>
+						<td>Dongle Points</td>
+						<td ng-if="stats.dongle_points">{{ stats.dongle_points }}</td>
+						<td ng-if="!stats.dongle_points">Not calculated</td>
+					</tr>
+					<tr>
+						<td>Dongle Ratio</td>
+						<td ng-if="stats.ratio">{{ stats.ratio | number:2 }}%</td>
+						<td ng-if="!stats.ratio">Not calculated</td>
+					</tr>
+					<tr>
+						<td>BT Ratio</td>
+						<td ng-if="stats.bt_ratio">{{ stats.bt_ratio }}%</td>
+						<td ng-if="!stats.bt_ratio">Not calculated</td>
+					</tr>
+				</table>
+				<label ng-if="trip.status == 'active'"><p>Statistics for that trip are not yet generated because trips is not finished.</p></label>
+			</div>
+			<div ng-show="activeRightTab == 'points'" id="pointsList">
+				<!-- <table class="table table-bordered">
+					<thead>
+						<th>Date</th>
+						<th>Lat</th>
+						<th>BT</th>
+						<th>Don.</th>
+						<th>Vehicle Speed</th>
+						<th>Acceleration</th>
+						<th>RPM</th>
+						<th>Fuel</th>
+						<th>Beh. Points</th>
+					</thead>
+					<tr ng-repeat="p in points">
+						<td>{{ p.timestamp | utcdatetime }}</td>
+						<td>{{ p.latitude }}<br/>{{ p.longitude }}</td>
+						<td>{{ p.bt }}</td>
+						<td>{{ p.dongle }}</td>
+						<td><span ng-show="p.vehicle_speed == -1">--/--</span><span ng-show="p.vehicle_speed > -1">{{ p.vehicle_speed / 1.609 | number:0 }}</span> mph</td>
+						<td><span ng-show="p.acceleration == -1">--/--</span><span ng-show="p.acceleration > -1">{{ p.acceleration / 1.609 | number:2 }}</span></td>
+						<td><span ng-show="p.rpm == -1">--/--</span><span ng-show="p.rpm > -1">{{ p.rpm | number:0 }}</span> rpm</td>
+						<td><span ng-show="p.fuel_economy == -1">--/--</span><span ng-show="p.fuel_economy > -1">{{ p.fuel_in_mpg | number:1 }}</span> mpg</td>
+						<td>
+						<i ng-show="p.behaviour_points > 0" class="fa fa-thumbs-down red"></i>
+						<i ng-show="p.behaviour_points == 0" class="fa fa-thumbs-up green"></i>
+						{{ p.behaviour_points }}
+						</td>
+					</tr>
+				</table> -->
+			</div>
+			<div ng-show="activeRightTab == 'edit'">
+				<div ng-include="'templates/trips/form.html'"></div>
+			</div>
+		</div>		
+	</div>
+	<div class="clear-fix"></div>
+</div>
+
+<div id="confirm" class="modal fade">
+ 	<div class="modal-dialog" style='width: 300px;'>
+        <div class="modal-content">
+		  <div class="modal-body">
+		    Are you sure you want to delete that trip?
+		  </div>
+		  <div class="modal-footer">
+		  	<button type="button" data-dismiss="modal" class="btn pull-left">No</button>
+		    <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Yes</button>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.btn-delete').click(function(){
+		var ans = confirm("Do you want to delete that trip");
+	
+		if (ans == true) {
+			return true;
+		}
+		
+		return false;
+	});
+});
+</script>

@@ -1,0 +1,192 @@
+<div id="trips-details">
+  <div role="tabpanel">    
+  </div>
+  <div class="col-md-6">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="nav-tabs" style="margin-bottom: 10px;">
+      <li role="presentation" ng-class="{'active': activeTab == 'map'}"><a ng-click="activeTab = 'map'; init()"  aria-controls="home" role="tab" data-toggle="tab">Map</a></li>
+      <li role="presentation" ng-class="{'active': activeTab == 'dongle'}"><a ng-click="activeTab = 'dongle'; init()"  aria-controls="profile" role="tab" data-toggle="tab">Dongle Data</a></li>
+    </ul>
+    <div id="googleMap" style="width:100%" ng-show="activeTab == 'map'" ></div>
+    <div class="col-md-12" ng-show="activeTab == 'dongle'">
+      <div id="googleSpeedMap" style="width:100%" ></div>
+
+        <table class="table table-bordered">
+          <thead>
+            <th colspan="2">Average</th>
+          </thead>
+          <tr>
+            <td>Avg. Vehicle Speed</td>
+            <td>{{ stats.speed_avg / 1.609 | number:0 }} mph</td>
+          </tr>
+          <tr>
+            <td>Max. Vehicle Speed</td>
+            <td>{{ stats.speed_max / 1.609 | number:0 }} mph</td>
+          </tr>
+          <tr>
+            <td>Avg. RPM</td>
+            <td>{{ stats.rpm_avg | number:0 }} RPM</td>
+          </tr>
+          <tr>
+            <td>Avg. MPG</td>
+            <td>{{ stats.fuel_avg_in_mpg | number:2 }} MPG</td>
+          </tr>
+          <tr>
+            <td>Behaviour Points</td>
+            <td>{{ stats.behaviour_points }}</td>
+          </tr>
+          <tr>
+            <td>Dongle Points</td>
+            <td>{{ stats.dongle_points }}</td>
+          </tr>
+          <tr>
+            <td>Dongle Ratio</td>
+            <td>{{ stats.ratio }}%</td>
+          </tr>
+          <tr>
+            <td>BT Ratio</td>
+            <td>{{ stats.bt_ratio }}%</td>
+          </tr>
+        </table>
+        <table class="table table-bordered">
+          <thead>
+            <th>Date</th>
+            <th>Lat</th>
+            <th>Lng</th>
+            <th>BT</th>
+            <th>Dongle</th>
+            <th>Vehicle Speed</th>
+            <th>RPM</th>
+            <th>Fuel</th>
+            <th>Beh. Points</th>
+          </thead>
+          <tr ng-repeat="p in points">
+            <td>{{ p.timestamp | utcdatetime }}</td>
+            <td>{{ p.latitude }}</td>
+            <td>{{ p.longitude }}</td>
+            <td>{{ p.bt }}</td>
+            <td>{{ p.dongle }}</td>
+            <td><span ng-show="p.vehicle_speed == -1">--/--</span><span ng-show="p.vehicle_speed > -1">{{ p.vehicle_speed / 1.609 | number:0 }}</span> mph</td>
+            <td><span ng-show="p.rpm == -1">--/--</span><span ng-show="p.rpm > -1">{{ p.rpm | number:0 }}</span> rpm</td>
+            <td><span ng-show="p.fuel_economy == -1">--/--</span><span ng-show="p.fuel_economy > -1">{{ p.fuel_in_mpg | number:1 }}</span> mpg</td>
+            <td>
+              <i ng-show="p.behaviour_points > 0" class="fa fa-thumbs-down red"></i>
+              <i ng-show="p.behaviour_points == 0" class="fa fa-thumbs-up green"></i>
+              {{ p.behaviour_points }}
+            </td>
+          </tr>
+        </table>
+      </div>
+  </div>
+  <div class="col-md-4">
+      <div class="col-md-12">
+			<table class='table table-bordered'>
+				<tr><td colspan='3'><b>Previous trip</b></td></tr>
+				<tr>
+					<td>{{ trip.prev.start_date | utcdatetime }}<br/>{{ trip.prev.end_date | utcdatetime }}</td>
+					<td>{{ trip.prev.start_mileage }}</td>
+					<td>{{ trip.prev.end_mileage }}</td>
+				</tr>
+				<tr><td colspan='3'><b>Next trip</b></td></tr>
+				<tr>
+					<td>{{ trip.next.start_date | utcdatetime }}<br/>{{ trip.next.end_date | utcdatetime }}</td>
+					<td>{{ trip.next.start_mileage }}</td>
+					<td>{{ trip.next.end_mileage }}</td>
+				</tr>
+			</table>
+        <label><h3>Trip details</h3></label>
+        <form class="form-horizontal" role="form" ng-submit="updateTrip()">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <label>Start location</label>
+              <input type="text" class="form-control" ng-model="trip.start_location" placeholder="Start location" ng-disabled="can_update == 0">
+            </div>
+          </div>
+           <div class="form-group">
+              <div class="col-sm-12">
+                <label>End location</label>
+                <input type="text" class="form-control" ng-model="trip.end_location" placeholder="End location" ng-disabled="can_update == 0">
+              </div>
+           </div>
+          <div class="form-group">
+            <div class="col-sm-6">
+              <label>Start mileage</label>
+              <input type="text" class="form-control" ng-model="trip.start_mileage" placeholder="Start mileage" ng-disabled="can_update == 0">
+            </div>
+            <div class="col-sm-6">
+              <label>End mileage</label>
+              <input type="text" class="form-control" ng-model="trip.end_mileage" placeholder="End mileage" ng-disabled="can_update == 0">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-6">
+              <label>Start date</label>
+              <input name="start_date" type="text" class="form-control" ng-model="trip.start_date" placeholder="Start date" ng-disabled="can_update == 0">
+            </div>
+            <div class="col-sm-6">
+              <label>End date</label>
+              <input name="end_date" type="text" class="form-control" ng-model="trip.end_date" placeholder="End date" ng-disabled="can_update == 0">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-6">
+              <label>Start latitude</label>
+              <input type="number" step="any" class="form-control" ng-model="trip.start_lat" placeholder="Starting latitude" ng-disabled="can_update == 0">
+            </div>
+            <div class="col-sm-6">
+              <label>Start longitude</label>
+              <input type="number" step="any" class="form-control" ng-model="trip.start_lon" placeholder="Starting longitude" ng-disabled="can_update == 0">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-6">
+              <label>End latitude</label>
+              <input type="number" step="any" class="form-control" ng-model="trip.end_lat" placeholder="Ending latitude" ng-disabled="can_update == 0">
+            </div>
+            <div class="col-sm-6">
+              <label>End longitude</label>
+              <input type="number" step="any" class="form-control" ng-model="trip.end_lon" placeholder="Ending longitude" ng-disabled="can_update == 0">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-6">
+                <label>Status</label>
+                <select class="form-control" ng-model="trip.status" ng-options="status as status for status in statuses" disabled ></select>
+            </div>
+            <div class="col-sm-6">
+              <label>Duration</label>
+              <input type="text" class="form-control" ng-model="trip.time" placeholder="Time" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <label>Reason</label>
+              <input type="text" class="form-control" ng-model="trip.reason" placeholder="Reason of the trip" ng-disabled="can_update == 0">
+            </div>
+          </div>
+          <div ifcan="update trips details" class="form-group">
+            <div class="col-sm-12">
+              <div id="msg"></div>
+              <hr />
+              <button type="submit" class="btn btn-primary pull-right">Save</button>
+              <button type="button" class="btn btn-primary pull-left" ng-click="resetTripForm()">Reset</button>
+            </div>
+          </div>
+        </form>	
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.btn-delete').click(function(){
+		var ans = confirm("Do you want to delete that trip");
+	
+		if (ans == true) {
+			return true;
+		}
+		
+		return false;
+	});
+});
+</script>

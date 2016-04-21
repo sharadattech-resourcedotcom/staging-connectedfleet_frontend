@@ -1,0 +1,95 @@
+<div class="col-md-8">
+	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	
+	<form class="form-horizontal" role="form" ng-submit="saveDriver()">
+	  <div class="form-group">
+	    <div class="col-sm-6">
+	    	<label>First name</label>
+	    	<input type="text" class="form-control" ng-model="driver.first_name" placeholder="First name" ng-disabled="!can_update" required>
+	    </div>
+	    <div class="col-sm-6">
+			<label>Last name</label>
+	    	<input type="text" class="form-control" ng-model="driver.last_name" placeholder="Last name" ng-disabled="!can_update" required>
+	    </div>				
+	  </div>
+	  <div class="form-group">
+	    <div class="col-sm-12">
+	    	<label>Phone</label>
+	    	<input type="text" class="form-control" ng-model="driver.phone" placeholder="Phone" ng-disabled="!can_update">
+	    </div>
+	  </div>			
+	  <div class="form-group">
+	    <div class="col-sm-12">
+	    	<label>Email</label>
+	    	<input type="email" class="form-control" ng-model="driver.email" placeholder="Email" ng-disabled="!can_update" required>
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <div class="col-sm-12">
+			<label>Payroll number</label>
+	    	<input type="text" class="form-control" ng-model="driver.payroll_number" placeholder="Payroll Number" ng-disabled="!can_update" required>
+	    </div>
+	  </div>
+	  <div ifcan="manage drivers types">
+			<label>Driver Type</label>
+			<select id="driver_type" class="form-control" ng-model="driver.driver_type_id" ng-options="type.id as type.name for type in drivers_types"></select>
+	  </div>
+	  <div ifcan="manage drivers types" class="form-group">
+			<div class="col-sm-12">
+				<label>Branch:</label>
+				<select class="form-control" name="branch" ng-model="driver.branch_id" ng-options="b.id as b.description for b in branches"></select>
+			</div>
+		</div>
+	  <div class="form-group">
+	  	<div class="col-sm-12">
+				<hr />
+	      <button type="submit" class="btn btn-primary pull-right" ng-if="can_update">Save</button>
+	    </div>
+	  </div>
+	</form>
+</div>
+<div class="col-md-4">
+	<div class="col-md-12 alert alert-danger" ng-show="pass_errors != ''">{{ pass_errors }}</div> 
+	<div class="col-md-12 alert alert-success" ng-show="pass_success != ''">{{ pass_success }}</div> 
+	<p><b>Change password</b></p>
+	<form id="changePasswordForm" class="form-horizontal" role="form" ng-submit="changePassword()">
+      <div class="form-group">
+        <div class="col-sm-12">
+          <input ifcant='change driver password without current' type="password" class="form-control" ng-model="newpassword.oldpassword" placeholder="Current password" ng-required="must_know_pass">
+        </div>
+      </div>
+	  <div class="form-group">
+	    <div class="col-sm-12">
+	      <input type="password" class="form-control" ng-model="newpassword.password" placeholder="New password" required>
+	    </div>
+	  </div>
+	  <div class="form-group">					
+	    <div class="col-sm-12">
+	      <input type="password" class="form-control" ng-model="newpassword.repeated" placeholder="Repeat new password" required>
+	    </div>				
+	  </div>
+	  <div class="form-group">
+	    <div class="col-sm-12">
+				<hr />
+	      <button type="submit" class="btn btn-primary pull-right">Save</button>
+	    </div>
+	  </div>
+	  <button ifcan="archive users" type="button" ng-click="archiveUser()" class="btn btn-danger btn-sm pull-right">Archive user</button>
+	</form>				
+</div>
+
+<div id="confirm" class="modal fade">
+ <div class="modal-dialog" style='width: 300px;'>
+        <div class="modal-content">
+		  <div class="modal-body">
+		    If you archive the user, he will not be longer able to log in to web page and mobile application. Are you sure?
+		  </div>
+		  <div class="modal-footer">
+		  	<button type="button" data-dismiss="modal" class="btn pull-left">No</button>
+		    <button type="button" data-dismiss="modal" class="btn btn-primary" id="archive">Yes</button>
+		  </div>
+		</div>
+	</div>
+</div>

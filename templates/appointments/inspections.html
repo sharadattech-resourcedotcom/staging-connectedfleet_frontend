@@ -1,0 +1,33 @@
+<div class="wrapper wrapper-content animated fadeInRight ecommerce" ifcan="see inspections" >
+    <div class="ibox float-e-margins">
+	    <div>
+	        <div class="row">	           
+	            <div class="col-sm-4 pull-right">
+	            	<input type="text" class="input-sm form-control" ng-model='filter' placeholder="Filter by id, name, last name or email">
+	            </div>
+	        </div>
+	        <div class="table-responsive">
+	            <table class="table">
+	                <thead>
+						<th>Id</th>
+						<th>Driver</th>
+						<!-- <th>Job number</th> -->
+						<th>Loose items</th>
+						<th>Date</th>
+						<th>Action</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="i in inspections | filter: filter" total-items="totalItems" current-page="currentPage">
+							<td>{{ i.id }}</td>
+							<td>{{ i.driver_full_name }}</td>
+							<!-- <td>{{ i.job_number }}</td> -->
+							<td>{{ i.loose_items }}</td>
+							<td>{{ i.created_at | utcdatetime }}</td>
+							<td><a ng-href="#/inspections/{{ i.id }}"><i class="fa fa-edit"></i></a></td>
+						</tr>
+					</tbody>
+	            </table>
+	        </div>
+	    </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div ng-show="appointment != null">
+	<h2>Appointment edit</h2>
+	<hr/>
+	<div class="col-md-12">
+		<div ng-include="'templates/appointments/form.html'"></div>
+		<button class="btn btn-primary pull-right" ng-click="updateAppointment();">Submit</button>
+		<button class="btn btn-default pull-left" ng-click="resetForm();">Reset</button>
+	</div>
+</div>

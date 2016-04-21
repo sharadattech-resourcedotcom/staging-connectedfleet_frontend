@@ -1,0 +1,29 @@
+<div class="col-md-6">
+	<h3>Emails templates</h3>
+	<div class="col-md-8 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-8 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	<div class="col-md-8">
+		<label>Email type:</label>
+		<select id="selected_type" class="form-control" ng-model="email.email_type" ng-options="type as type for type in email_types" ng-change="selectEmail();"></select>
+		<hr>
+		<div ng-show="email.email_type == 'Inspection job completed'">
+			<label>Receivers:</label>
+			<input type="text" class="form-control" name="email_recipients" ng-model="email.recipients">
+			<hr>
+		</div>
+		<label>Subject:</label>
+		<input type="text" class="form-control" name="email_subject" ng-model="email.subject">
+		<hr>
+	</div>
+	<div class="col-md-4" ng-show="email.email_type">
+		<label>Available variables:</label>
+		<div class="text-left" ng-repeat="var in email_variables[email.email_type]">
+			{{ var }}
+		</div>
+	</div>
+	<div class="col-md-12" ng-show="email.email_type">
+			<label>Body:</label>
+			<textarea id="email_content" class="form-control" rows="20" ng-model="email.content"/>
+			<button class="btn btn-primary pull-right" style="margin-top: 10px" ng-click="saveEmailTemplate();">Submit</button>
+	</div>
+</div>

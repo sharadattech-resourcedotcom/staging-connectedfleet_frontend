@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3 class="modal-title">Damage collection preview</h3>
+</div>
+<div class="modal-body">
+	<table calss="table table-bordered">
+		<tr>
+			<p ng-if="collection.description && collection.description != ' ' ">
+				<label>Damage description:</label>
+				{{collection.description}}
+			</p>
+		</tr>
+		<tr ng-repeat="damage in collection.damage_items">
+			<td>
+				<div style="padding: 10px; margin-left: 100px" >
+					<img width="300" height="300" src="{{imgsrc + damage.file_path}}" />
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="cancel()" class="btn pull-left">Close</button>
+</div>

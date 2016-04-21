@@ -1,0 +1,57 @@
+<div class="col-md-12">	
+	<h2>Appointment details</h2>
+		<table class="table">
+			<tr>
+				<td class="text-right">
+					<label><h3>Status</h3></label>
+				</td>
+				<td colspan="3"><h3>{{appointment.status}}</h3></td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Branch</label></td>
+				<td>{{ appointment.branch.description }}</td>
+				<td class="text-right"><label>Insurance Company</label></td>
+				<td>{{ appointment.insurance_company.name }}</td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Product</label></td>
+				<td>{{ appointment.product.description }}</td>
+				<td class="text-right"><label>Vehicle</label></td>
+				<td>{{ appointment.vehicle_info }}</td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>City</label></td>
+				<td>{{ appointment.city }}</td>
+				<td class="text-right"><label>Street</label></td>
+				<td>{{ appointment.street }}</td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Postcode</label></td>
+				<td>{{ appointment.postcode }}</td>
+				<td class="text-right"><label>Claim Number</label></td>
+				<td>{{ appointment.claim_number }}</td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Excess</label></td>
+				<td>{{ appointment.excess }}</td>
+				<td class="text-right"><label>Home phone</label></td>
+				<td>{{ appointment.home_phone }}</td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Contact Name</label></td>
+				<td>{{ appointment.contact_name }}</td>
+				<td class="text-right"><label>Work phone</label></td>
+				<td>{{ appointment.work_phone }}</td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Email</label></td>
+				<td>{{ appointment.email }}</td>
+				<td class="text-right"><label>Mobile</label></td>
+				<td>{{ appointment.mobile }}</td>
+			</tr>
+			<tr >
+				<td class="text-right"><label>Notes</label></td>
+				<td colspan="2">{{ appointment.notes }}</td>
+			</tr>
+		</table>
+</div>

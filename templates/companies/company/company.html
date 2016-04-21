@@ -1,0 +1,14 @@
+<div class="col-md-12 page-header">
+	<h3>{{ company.name }}</h3>
+</div>
+
+<!-- Menu -->
+<div class="col-md-2">
+	<div class="col-md-12 btn-group btn-group-vertical">
+		<button type="button" class="btn btn-default" ng-click="changeLocation('details')">Details</button>
+		<button type="button" class="btn btn-default" ng-click="changeLocation('company_heads')">Company heads</button>
+	</div>
+</div>
+<div class="col-md-10">
+	<div app-view-segment="1"></div>
+</div>

@@ -1,0 +1,54 @@
+<div class="col-md-8">
+  <div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+  <div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+  <p><b>Details</b></p>
+  <form class="form-horizontal" role="form" ng-submit="saveCompanyHead()">
+    <div class="form-group">
+      <div class="col-sm-6">
+        <input type="text" class="form-control" ng-model="companyHead.first_name" placeholder="First name" required>
+      </div>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" ng-model="companyHead.last_name" placeholder="Last name" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <input type="text" class="form-control" ng-model="companyHead.phone" placeholder="Phone">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <input type="email" class="form-control" ng-model="companyHead.email" placeholder="Email" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <hr />
+        <button type="submit" class="btn btn-primary pull-right">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="col-md-4">
+  <div class="col-md-12 alert alert-danger" ng-show="pass_errors != ''">{{ pass_errors }}</div> 
+  <div class="col-md-12 alert alert-success" ng-show="pass_success != ''">{{ pass_success }}</div> 
+  <p><b>Change password</b></p>
+  <form id="changePasswordForm" class="form-horizontal" role="form" ng-submit="changeCompanyHeadPassword()">
+    <div class="form-group">
+      <div class="col-sm-12">
+        <input type="password" class="form-control" ng-model="newpassword.password" placeholder="New password" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <input type="password" class="form-control" ng-model="newpassword.repeated" placeholder="Repeat password" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <hr />
+        <button type="submit" class="btn btn-primary pull-right">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

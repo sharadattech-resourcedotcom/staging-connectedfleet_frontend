@@ -1,0 +1,34 @@
+<div class="col-md-6">
+	<label><h2>Driver Types</h2></label><br>
+	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+	<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
+	<div ng-show="!create">
+		<button type="submit" class="btn btn-primary pull-right" style="margin-bottom: 10px" ng-click="create = true;">Create type</button>
+		<select id="selected_type" class="form-control" ng-model="driver_type" ng-options="type as type.name for type in drivers_types"></select>
+		<hr>
+		<div class="col-md-6">
+			<label>Normal hour rate :</label>
+			<input ng-model="driver_type.hourly_rate" name="hourly_rate" type="number" class="form-control" />
+		</div>
+		<div class="col-md-6">
+			<label>Extra hours rate :</label>
+			<input ng-model="driver_type.additional_hour_rate" name="additional_hour_rate" type="number" class="form-control" />				
+		</div>
+		<button class="btn btn-primary pull-right" style="margin-top: 10px" ng-click="saveDriverType();">Submit</button>
+	</div>
+	<div ng-show="create">
+		<div class="col-md-6">
+			<label>Name :</label>
+			<input ng-model="driver_type.name" name="name" type="text" class="form-control" />
+			<hr>
+
+			<label>Normal hour rate :</label>
+			<input ng-model="driver_type.hourly_rate" name="hourly_rate" type="number" class="form-control" />
+			<hr>
+			<label>Extra hours rate :</label>
+			<input ng-model="driver_type.additional_hour_rate" name="additional_hour_rate" type="number" class="form-control" />	
+			<button class="btn btn-primary pull-right" style="margin-top: 10px" ng-click="saveType();">Submit</button>
+			<button class="btn btn-primary pull-left" style="margin-top: 10px" ng-click="create = false;">Cancel</button>			
+		</div>
+	</div>
+</div>

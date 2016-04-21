@@ -1,0 +1,34 @@
+<div class="col-md-12 no-padding jobs-list" style="height: 300px">
+    <table class="table">
+        <thead class="jobs-header">
+            <th>Appointment</th>
+            <th>Number</th>
+            <th>Driver</th>
+            <th>Vehicle</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </thead>
+        <tr ng-repeat="j in jobs" ng-class="{job_done: j.is_done}">
+            <td>
+                <i ng-if="j.is_acknowledged" class="fa fa-thumbs-up"></i>
+                {{ j.appointment_info.description}} (<a ng-href="#/appointments/{{j.appointment_info.id}}/details">{{j.appointment_info.id}}</a>)
+            </td>
+            <td>{{ j.number }}</td>
+            <td>
+                <a href="#/drivers/{{ j.user_id }}/currentPeriod">{{ j.driver_full_name }}</a>                    
+            </td>
+            <td>
+                <a href="#/vehicles/{{ j.appointment_info.vehicle_id }}/details">{{ j.appointment_info.vehicle }}</a>
+            </td>
+            <td>{{ j.start_date | utcdatetime }}</td>
+            <td>{{ j.end_date | utcdatetime }}</td>
+            <td>{{ j.appointment_info.address}}</td>
+            <td class="text-center"><a ng-click="deleteJob(j)" ng-show="j.is_done == false"><i class="fa fa-trash"></i></a></td>
+        </tr>
+    </table>
+</div>
+<div class="col-md-12 no-padding" style="height: 300px">
+    <div app-view-segment="2"></div>
+</div>

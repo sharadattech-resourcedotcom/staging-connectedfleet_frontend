@@ -1,0 +1,166 @@
+<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 					  
+<div class="col-md-12 no-padding" ng-show="currentPeriod">
+	<div class="row" ng-show="mode == 'normal'">
+		<div class="ibox float-e-margins">            
+	        <div class="col-md-12">
+	        	<div class="col-md-12 no-padding">
+	        		<div class="col-md-4 no-padding">
+                        <div class="col-md-8">
+                            <label>Period start mileage:</label>
+                            <div class="input-group">
+                                <input type="text" onlyDigits ng-model="currentPeriod.start_mileage" class="form-control" ng-disabled="!canChange"> 
+                                <span ng-if="canChange" class="input-group-btn"> <button type="button" ng-click="changePeriodStartMileage()" class="btn btn-primary">Change</button></span>
+                            </div>
+                        </div>
+	        		</div>
+	        		<div class="col-md-6 no-padding text-center">
+	        			<a ifcan="refresh mileage" ng-click='refreshPeriodMileage(currentPeriod)' class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh Mileage</a>
+	        			<a ifcan="create trips" ng-click="createTrip(currentPeriod)" class="btn btn-white btn-sm"><i class="fa fa-plus"></i> Create Trip</a>
+                <a ifcan="generate security codes" ng-click="showSecurityCodeModal()" class="btn btn-white btn-sm"><i class="fa fa-unlock"></i> Generate Security Code</a>
+	    			</div>
+	    			<div class="col-md-2 no-padding text-right">
+	        			<a ifcan="close period" ng-click="switchMode('close')" class="btn btn-white btn-sm"><i class="fa fa-mail-forward"></i> Close Period</a>
+	        	</div>
+	        	</div>
+	        	<div class="clearfix"></div>
+	            <table class="table table-striped table-bordered table-hover m-t-10">
+	                <thead>
+	                	<tr>
+	                    	<th>#</th>
+							<th>Start<br/>mileage</th>
+							<th>End<br/>mileage</th>
+							<th>Start<br/>date</th>
+							<th>End<br/>date</th>
+							<th>Vehicle</th>
+							<th>Business<br/>mileage</th>
+							<th>Private<br/>mileage</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+	                    <tr ng-repeat='t in trips' ng-click="redirectToTripDetails(t.id)" >
+					      <td>{{ t.id }}</td>
+					      <td>{{ t.start_mileage }}</td>
+					      <td>{{ t.end_mileage }}</td>
+					      <td>{{ t.start_date | utcdatetime }}</td>
+					      <td>{{ t.end_date | utcdatetime }}</td>
+					      <td>{{ t.vehicle_reg_number }}</td>
+					      <td>{{ t.mileage }}</td>
+					      <td>{{ t.private_mileage }}</td>
+					    </tr>
+	                </tbody>
+	            </table>
+                <div class="pull-right">
+                    <label>Business mileage:&nbsp</label>{{ currentPeriod.overall_mileage.business }} <br>
+                    <label>Private mileage:&nbsp&nbsp&nbsp&nbsp</label>{{ currentPeriod.overall_mileage.private }}<br>
+                </div>
+	        </div>
+	    </div>
+	</div>
+		<div class="row close-form" ng-show="mode == 'close'">
+			<div class="ibox float-e-margins">
+				<div class="form-group">
+					<p>Start date: <span class='start-date'></span></p>               
+					<p>Start mileage: <span class='start-mileage'></span></p>       
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Period End Date </label>
+					<div class="col-md-12 no-padding" style="padding-left: 0px; padding-top: 5px; padding-bottom: 15px;">
+              <div class="col-md-8" ng-if="supportDate" style="padding-left: 0px;">
+                  <input type="date" class="form-control" name="period_end_date" placeholder="Period end dates (DD/MM/YYYY)">                    
+              </div>
+              <div ng-if="!supportDate">
+        					<div class="col-md-8" style="padding-left: 0px;">
+        						<input type="text" disabled="disabled" class="form-control" name="period_end_date" placeholder="Period end dates (DD/MM/YYYY)">                    
+        					</div>
+        					<div class="col-md-4" style="padding-left: 0px;">
+        						<button class="btn btn-primary" ng-click="choosePeriodEndDate();">Choose Date</button>
+        					</div>
+              </div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">End mileage</label>
+					<input type="text" class="form-control" name="end_mileage" placeholder="End mileage">
+				</div>          
+				<div class="form-group">
+					<label for="exampleInputEmail1">Agent email address</label>
+					<input type="email" class="form-control" name="agent_email" value="" placeholder="Agent email">
+				</div>
+				<input type="checkbox" ng-model="thicked_checkbox"><a style="color: #676a6c; text-decoration: none;" ng-click="thicked_checkbox = !thicked_checkbox" > I confirm that I have completed all checks (Visual, Internal and External), as described in Photo-Me’s online Driver Awareness training and Driver Handbook. I have also reported any defects to CLM and/or Photo-Me’s Health & Safety Manager.</a>
+				<div class="row col-md-12">
+					<button type="button" class="btn btn-default pull-left " ng-click="mode='normal'">Close</button>
+					<button type="button" class="btn btn-primary" ng-click='confirmClosingPeriod();' ng-disabled="!thicked_checkbox">Close Period</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row create-trip-form" ng-show="mode == 'createTrip'">
+			<div class="ibox float-e-margins">
+<form class="form-horizontal" role="form" ng-submit="submitTrip()">
+
+         <div class="form-group">
+           <div class="col-sm-12">
+             <input type="text" class="form-control" ng-model="trip.start_location" name='start_location' placeholder="Start location">
+           </div>
+         </div>
+          <div class="form-group">
+             <div class="col-sm-12">
+               <input type="text" class="form-control" ng-model="trip.end_location" name='end_location' placeholder="End location"  >
+             </div>
+          </div>
+         <div class="form-group">
+           <div class="col-sm-6">
+             <input type="text" class="form-control" ng-model="trip.start_mileage" name='start_mileage' placeholder="Start mileage" required>
+           </div>
+           <div class="col-sm-6">
+             <input type="text" class="form-control" ng-model="trip.end_mileage" name='end_mileage' placeholder="End mileage" required>
+           </div>
+         </div>
+
+         <div class="form-group">
+           <div class="col-sm-6">
+             <input id="startDateTimePicker" type="text" class="form-control" name='start_date' ng-model="trip.start_date" placeholder="Start date (UK)" required>
+           </div>
+           <div class="col-sm-6">
+             <input id="endDateTimePicker" type="text" class="form-control" name='end_date' ng-model="trip.end_date" placeholder="End date (UK)" required>
+           </div>
+         </div>
+
+         <div class="form-group">
+           <div class="col-sm-6">
+             <input type="number" step="any" class="form-control" name='start_lat' ng-model="trip.start_lat" placeholder="Starting latitude" required>
+           </div>
+           <div class="col-sm-6">
+             <input type="number" step="any" class="form-control" name='start_lon' ng-model="trip.start_lon" placeholder="Starting longitude" required>
+           </div>
+         </div>
+
+         <div class="form-group">
+           <div class="col-sm-6">
+             <input type="number" step="any" class="form-control" name='end_lat' ng-model="trip.end_lat" placeholder="Ending latitude" required>
+           </div>
+           <div class="col-sm-6">
+             <input type="number" step="any" class="form-control" name='end_lon' ng-model="trip.end_lon" placeholder="Ending longitude" required>
+           </div>
+         </div>
+
+         <div class="form-group">
+           <div class="col-sm-6">
+             <input type="text" class="form-control" name='reason' ng-model="trip.reason" placeholder="Reason of the trip">
+           </div>
+           <div class="col-sm-6">
+             <input type="text" class="form-control" name='vehicle_reg_number' placeholder="Vehicle reg number" required>
+           </div>
+         </div>
+        <input type='text' name="period_start_date" class='hidden' />
+        <input type='text' name="user_id"  class='hidden'/>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" ng-click="mode='normal'">Close</button>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+      	</div>
+      </div>
+	</div>
+</div>

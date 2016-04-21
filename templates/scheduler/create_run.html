@@ -1,0 +1,63 @@
+<div ng-if="can_manage_scheduler == 1">
+	<div class="col-md-12 header">
+		<div class="col-md-10 no-padding"><b>CREATE JOBS</b></div>
+		<div class="col-md-2 no-padding text-right">
+			<a style="margin-right: 5px" onclick="changeCreateRunSize(false)"><i class="fa fa-compress"></i></a>
+			<a style="margin-left: 5px" onclick="changeCreateRunSize(true)" ng-click="windowOpened();"><i class="fa fa-expand"></i></a>
+		</div>
+	</div>
+	<div class="col-md-12" style="overflow: auto; height: calc(100% - 25px)">
+		<div class="alert alert-danger" role="alert" ng-show="errors != ''">{{ errors }}</div>
+		<table class="table">
+			<thead>
+				<th>Appointment</th>
+				<th ng-if="company_id == 8">Job type</th>
+				<th>Start</th>
+				<th>End</th>
+				<th>Driver</th>
+				<th>Actions</th>
+			</thead>
+				<tr ng-repeat="job in newJobs track by $index" class="job-row">
+					<td class="col-md-4">					
+						<p>
+							<select class="input-sm form-control" ng-click="checkParentAppointments();" ng-model="job.appointment_id"  ng-options="appointment.id as (appointment.branch.description + ' - ' +  appointment.product.description +' ('+appointment.id +')' ) for appointment in appointments"></select>
+						</p>
+					</td>
+					<td ng-if="isGemini()">
+						<select class="input-sm form-control" ng-model="job.job_type">
+							<option value="D">Delivery</option>
+							<option value="C">Collection</option>
+						</select>
+					</td>
+					<td class="col-md-2">
+						<p><input ng-model="job.start_date" type="time" class="form-control" placeholder="Start Time"/></p>
+					</td>
+					<td class="col-md-2">
+						<p><input ng-model="job.end_date" type="time" class="form-control" placeholder="End Time"/></p>
+					</td>
+					<td class="col-md-2">
+						<p><select class="input-sm form-control" ng-model="job.user_id"  ng-options="driver.id as driver.full_name for driver in drivers"></select></p>
+					</td>
+					<td class="text-center">
+	        			<p style="margin-top: 10px;"><a ng-click="removeJob(job)"><i class="fa fa-trash"></i></a></p>
+	        			<!-- <p>
+	        				<a ng-show="$index > 0" ng-click="move('u', job, $index)"><i class="fa fa-arrow-up"></i></a>
+	        				<a ng-show="($index + 1) != newJobs.length" ng-click="move('d', job, $index)"><i class="fa fa-arrow-down"></i></a>
+	        			</p> -->
+					</td>
+				</tr>
+			<tbody>
+				<tr>
+					<td colspan="6"><button class="btn btn-primary btn-sm" ng-click="addJob();"><i class="fa fa-plus-circle"></i> Add Job</button></td>
+				</tr>			
+			</tbody>
+		</table>
+
+		<div class="col-md-12">
+			<div class="col-md-6"><button class="btn btn-danger btn-sm" ng-click="cancel()">Cancel</button></div>
+			<div class="col-md-6 text-right">
+				<button class="btn btn-primary btn-sm" ng-click="save(false)">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,1 @@
+var ngApp = angular.module('ngApp', ['ngRoute', 'ngSanitize', 'route-segment', 'view-segment', 'angular.filter', 'chart.js', 'angularUtils.directives.dirPagination', 'angularFileUpload','ui.bootstrap']);

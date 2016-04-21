@@ -1,0 +1,43 @@
+<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
+<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div>
+<div class="col-md-4 no-padding">
+    <div class="col-md-8">
+        <label>Period start mileage:</label>
+        <div class="input-group">
+            <input type="text" onlyDigits ng-model="period.start_mileage" class="form-control" ng-disabled="!canChange"> 
+            <span ng-if="canChange" class="input-group-btn"> <button type="button" ng-click="changePeriodStartMileage()" class="btn btn-primary">Change</button></span>
+        </div>
+    </div>
+</div>     
+<button ifcan="reopen period" id="reopenPeriodButton" type="button" ng-click="reopenPeriod()" style="margin-left:10px" class="btn btn-primary pull-right" ng-show="reopenButton">Reopen</button>
+<a ifcan="refresh mileage" id="refreshPeriodButton" ng-click='refreshPeriodMileage(period)' style="margin-left:10px" class="btn btn-primary pull-right">Refresh mileage</a>
+<table class="table table-striped table-hover">
+    <button ng-if="!period.approved && period.status=='closed'" ifcan="approve periods" id="approvePeriodButton" type="button" ng-click="approvePeriod()" class="btn btn-primary pull-right">Approve period</button>
+    <thead>
+        <th>#</th>
+        <th>Start mileage</th>
+        <th>End mileage</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Time</th>
+        <th>Vehicle</th>
+        <th>Business mileage</th>
+        <th>Private mileage</th>
+    </thead>
+
+    <tr ng-repeat='t in previousPeriodTrips' ng-click="redirectToTripDetails(t.id)" >
+        <td>{{ t.id }}</td>
+        <td>{{ t.start_mileage }}</td>
+        <td>{{ t.end_mileage }}</td>
+        <td>{{ t.start_date | utcdatetime }}</td>
+        <td>{{ t.end_date | utcdatetime }}</td>
+        <td>{{ dateDiff(t.start_date, t.end_date) }}</td>
+        <td>{{ t.vehicle_reg_number }}</td>
+        <td>{{ t.mileage }}</td>
+        <td>{{ t.private_mileage }}</td>
+    </tr>
+</table>
+<div class="col-md-12 text-right"><label>Business mileage:&nbsp</label>{{ period.overall_mileage.business }}</div>
+<div class="col-md-12 text-right"><label>Private mileage:&nbsp&nbsp&nbsp&nbsp</label>{{ period.overall_mileage.private }}</div>
+</div>
+

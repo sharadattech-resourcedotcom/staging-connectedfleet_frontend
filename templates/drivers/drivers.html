@@ -1,0 +1,16 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>Drivers</h2>
+        <ol class="breadcrumb">
+	        <li>
+	            <a href="#/drivers">List</a>
+	        </li>
+	    </ol>
+    </div>
+</div>
+<div ifcan="see drivers list" class="tabs-container">
+    <ul class="nav nav-tabs">
+    	<li ng-class="getClass('/list')"><a ng-href="#/drivers/list">Drivers List</a></li>
+    	<li ifcan="approve periods"  ng-class="getClass('/periods_to_approve')"><a ng-href="#/drivers/periods_to_approve">Periods to approve</a></li>
+</div>
+<div app-view-segment="1" id="drivers"></div>
