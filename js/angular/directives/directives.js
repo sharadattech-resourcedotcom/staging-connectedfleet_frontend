@@ -98,6 +98,39 @@ ngApp.directive('onlyDigits', function() {
   }; 
 });
 
+ngApp.directive('timeParser', function() {
+  return {
+    require: 'ngModel',
+    link: function (scope, element, attr, ngModelCtrl) {
+      function fromUser(text) {
+        var transformedInput = text.replace(/[^0-9]/g, '');
+        patt = new RegExp("^([0-1][0-9]|2[0-3]):([0-5][0-9])$");
+        hPatt = new RegExp("^([0-1][0-9]|2[0-3])");
+        if (transformedInput.length > 4) {
+          transformedInput = transformedInput.substring(0,4);
+        };
+
+        if (transformedInput.length > 2) {
+          transformedInput = transformedInput.slice(0,2) + ":" + transformedInput.slice(2);
+          if (!hPatt.test(transformedInput)) {
+            transformedInput = "23" + transformedInput.slice(2);
+            if (!patt.test(transformedInput)) {
+              transformedInput = transformedInput.slice(0,2) + ":59";
+            }
+          }
+        };
+
+        if(transformedInput !== text) {
+            ngModelCtrl.$setViewValue(transformedInput);
+            ngModelCtrl.$render();
+        }
+        return transformedInput;  // or return Number(transformedInput)
+      }
+      ngModelCtrl.$parsers.push(fromUser);
+    }
+  }; 
+});
+
 ngApp.directive('allowTab', function () {
         return {
             require: 'ngModel',

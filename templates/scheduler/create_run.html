@@ -30,10 +30,10 @@
 						</select>
 					</td>
 					<td class="col-md-2">
-						<p><input ng-model="job.start_date" type="time" class="form-control" placeholder="Start Time"/></p>
+						<p><input ng-model="job.start_date" type="text" time-parser class="form-control" placeholder="Start Time"/></p>
 					</td>
 					<td class="col-md-2">
-						<p><input ng-model="job.end_date" type="time" class="form-control" placeholder="End Time"/></p>
+						<p><input ng-model="job.end_date" type="text" time-parser class="form-control" placeholder="End Time"/></p>
 					</td>
 					<td class="col-md-2">
 						<p><select class="input-sm form-control" ng-model="job.user_id"  ng-options="driver.id as driver.full_name for driver in drivers"></select></p>
