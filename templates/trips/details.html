@@ -5,7 +5,8 @@
 			<li role="presentation" ng-show="trip.stats_gen" ng-class="{'active': activeTab == 'charts'}"><a ng-click="activeTab = 'charts'; getChartData()"  aria-controls="profile" role="tab" data-toggle="tab">Charts</a></li>
 		</ul>
 		<div ng-hide="loader" class="cont">
-			<div id="googleMap" style="width:100%; height: 100%" ng-show="activeTab == 'map' && !loader" ></div>
+			<!-- <div id="googleMap" style="width:100%; height: 100%" ng-show="activeTab == 'map' && !loader" ></div> -->
+			<trip-map set-functions="setDirectiveFn(mapInit, setMarker)" ng-show="activeTab == 'map'"></trip-map>
 			<div ng-show="activeTab == 'charts'" class="charts-cont">
 				<div class="col-md-12 no-padding">
 					<div class="col-md-3">
@@ -35,7 +36,7 @@
 		<ul class="nav nav-tabs" id="nav-tabs">
 			<li role="presentation" ng-class="{'active': activeRightTab == 'general'}"><a ng-click="activeRightTab = 'general';"  aria-controls="home" role="tab" data-toggle="tab">Statistics</a></li>
 			<li role="presentation" ng-class="{'active': activeRightTab == 'edit'}" ifcan="update trips details"><a ng-click="activeRightTab = 'edit';"  aria-controls="home" role="tab" data-toggle="tab">Edit Trip</a></li>
-			<li role="presentation" ng-class="{'active': activeRightTab == 'points'}"><a ng-click="activeRightTab = 'points'; checkPoints();"  aria-controls="profile" role="tab" data-toggle="tab">Points</a></li>
+			<li role="presentation" ng-class="{'active': activeRightTab == 'points'}"><a ng-click="activeRightTab = 'points'; getTripPoints(true);"  aria-controls="profile" role="tab" data-toggle="tab">Points</a></li>
 			<button ifcan="delete trips" type="button" ng-click="deleteTrip()" class="btn btn-danger btn-sm pull-right">Delete trip</button>
 		</ul>
 		<div class="cont">
