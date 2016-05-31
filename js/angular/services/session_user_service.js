@@ -60,10 +60,19 @@ ngApp.factory('SessionUser', function ($location) {
         return false;
     };
 
+    var isFromCLM = function() {
+        if (getItem("companyId") == 3) {
+            return true;
+        }
+        return false;
+    };
+
+
     return {
      signin: signin,
      signout: signout,
      getItem: getItem,
-     isFromPhotoMe: isFromPhotoMe
+     isFromPhotoMe: isFromPhotoMe,
+     isFromCLM: isFromCLM
     };
 });
