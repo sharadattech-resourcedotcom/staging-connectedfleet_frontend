@@ -9,11 +9,7 @@ ngApp.controller('InspectionDetailsController', function($scope, $rootScope, $lo
 	    Api.fetch(URLS.inspection_details.replace(':id', $routeParams.id), function (data, status) {
 	    	$scope.inspection = data.data.inspection;
         $scope.driver = data.data.driver;
-        if(SessionUser.isFromCLM()) {
-          $scope.download_path = BACKEND_HOST + "/inspections/download_clm_inspection_pdf?inspection_id="+$scope.inspection.id+"&token="+SessionUser.getItem("access_token")+"&";
-        } else {
-          $scope.download_path = BACKEND_HOST + "/inspections/download_inspection_pdf?inspection_id="+$scope.inspection.id+"&token="+SessionUser.getItem("access_token")+"&";
-        }
+        $scope.download_path = BACKEND_HOST + "/inspections/download_" + SessionUser.companyAbbrev() + "_inspection_pdf?inspection_id="+$scope.inspection.id+"&token="+SessionUser.getItem("access_token")+"&";
         
 	    });
     };

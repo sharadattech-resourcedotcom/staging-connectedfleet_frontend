@@ -67,12 +67,33 @@ ngApp.factory('SessionUser', function ($location) {
         return false;
     };
 
+    var companyAbbrev = function() {
+        if (getItem("companyId") == 3) {
+            return "clm";
+        } else if (getItem("companyId") == 4) {
+            return "photome";
+        } else if (getItem("companyId") == 9) {
+            return "ageas";
+        } else if (getItem("companyId") == 13) {
+            return "lcvr";
+        } else if (getItem("companyId") == 2) {
+            return "av";
+        } else if (getItem("companyId") == 34) {
+            return "ed";
+        } else if (getItem("companyId") == 35 || getItem("companyId") == 8) {
+            return "gemini";
+        } else {
+            return "";
+        }
+    };
+
 
     return {
      signin: signin,
      signout: signout,
      getItem: getItem,
      isFromPhotoMe: isFromPhotoMe,
-     isFromCLM: isFromCLM
+     isFromCLM: isFromCLM,
+     companyAbbrev: companyAbbrev
     };
 });
