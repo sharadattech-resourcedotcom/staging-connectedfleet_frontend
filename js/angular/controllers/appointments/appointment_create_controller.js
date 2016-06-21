@@ -1,9 +1,10 @@
-ngApp.controller("AppointmentCreateController",function($scope, $location, $routeParams, $timeout, Api, $filter, $controller){
+ngApp.controller("AppointmentCreateController",function($scope, $location, $routeParams, SessionUser, $timeout, Api, $filter, $controller){
 
 	$scope.success = '';
     $scope.errors = '';
     $scope.appointment = {};
-    
+    $scope.secondAddress = SessionUser.isFromGemini();
+
     $scope.resetForm = function() {
         $scope.searchForm = {registration: null, manufacturer_id: null, model_id: null, fleet_type: null, body_code: null, transmission: null, fuel_type: null, colour: null };
     };

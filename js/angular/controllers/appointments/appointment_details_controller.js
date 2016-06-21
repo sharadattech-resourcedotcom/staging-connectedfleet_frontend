@@ -1,4 +1,4 @@
-ngApp.controller("AppointmentDetailsController",function($scope, $location, $routeParams, $timeout, Api, $filter, $controller){
+ngApp.controller("AppointmentDetailsController",function($scope, $location, $routeParams, $timeout, Api, $filter, $controller, SessionUser){
 
 	$scope.success = '';
     $scope.errors = '';

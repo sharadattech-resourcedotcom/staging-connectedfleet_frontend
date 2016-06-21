@@ -31,25 +31,36 @@
     </div>
     <div class="hr-line-dashed"></div>
     <div class="form-group">
-        <p ng-show="isGemini()" class="form-header">Delivery Address</p>
+        <!-- <p ng-show="isGemini()" class="form-header">Delivery Address</p> -->
     	<label class="col-sm-2 control-label">City</label>
         <div class="col-sm-4">
         	<input type="text" class="form-control" name="city" ng-model="appointment.city">
         </div>
-        <label class="col-sm-2 control-label">Street</label>
+        <label class="col-sm-2 control-label">Postcode</label>
         <div class="col-sm-4">
-        	<input type="text" class="form-control" name="city" ng-model="appointment.street">
+            <input type="text" class="form-control" name="city" ng-model="appointment.postcode">
         </div>
     </div>
     <div class="hr-line-dashed"></div>
     <div class="form-group">
-    	<label class="col-sm-2 control-label">Postcode</label>
+    	<label class="col-sm-2 control-label">Address Line 1</label>
         <div class="col-sm-4">
-        	<input type="text" class="form-control" name="city" ng-model="appointment.postcode">
+            <input type="text" class="form-control" name="city" ng-model="appointment.street">
+        </div>
+         <label class="col-sm-2 control-label">Address Line 2</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="city" ng-model="appointment.street2">
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Home Name/Number</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="city" ng-model="appointment.home_number">
         </div>
     </div>
 
-    <div ng-show="isGemini()">
+<!--     <div ng-show="isGemini()">
         <div class="hr-line-dashed"></div>
         <div class="form-group">
             <p class="form-header">Collection Address</p>
@@ -91,7 +102,7 @@
                 <input type="checkbox" value="true" ng-value="true" class="form-control" name="city" ng-model="appointment.courtesy_car" ng-selected="appointment.courtesy_car == true">
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="hr-line-dashed"></div>
     <div class="form-group">

@@ -67,6 +67,13 @@ ngApp.factory('SessionUser', function ($location) {
         return false;
     };
 
+    var isFromGemini = function() {
+        if (getItem("companyId") == 35 || getItem("companyId") == 8) {
+            return true;
+        }
+        return false;
+    };
+
     var companyAbbrev = function() {
         if (getItem("companyId") == 3) {
             return "clm";
@@ -94,6 +101,7 @@ ngApp.factory('SessionUser', function ($location) {
      getItem: getItem,
      isFromPhotoMe: isFromPhotoMe,
      isFromCLM: isFromCLM,
+     isFromGemini: isFromGemini,
      companyAbbrev: companyAbbrev
     };
 });

@@ -22,18 +22,24 @@
 			<tr>
 				<td class="text-right"><label>City</label></td>
 				<td>{{ appointment.city }}</td>
-				<td class="text-right"><label>Street</label></td>
-				<td>{{ appointment.street }}</td>
-			</tr>
-			<tr>
 				<td class="text-right"><label>Postcode</label></td>
 				<td>{{ appointment.postcode }}</td>
-				<td class="text-right"><label>Claim Number</label></td>
-				<td>{{ appointment.claim_number }}</td>
+			
 			</tr>
 			<tr>
-				<td class="text-right"><label>Excess</label></td>
-				<td>{{ appointment.excess }}</td>
+				<td class="text-right"><label>Address Line 1</label></td>
+				<td>{{ appointment.street }}</td>
+				<td class="text-right"><label>Address Line 2</label></td>
+				<td>{{ appointment.street2 }}</td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Home name/number</label></td>
+				<td>{{ appointment.home_number }}</td>
+				<td></td><td></td>
+			</tr>
+			<tr>
+				<td class="text-right"><label>Claim Number</label></td>
+				<td>{{ appointment.claim_number }}</td>
 				<td class="text-right"><label>Home phone</label></td>
 				<td>{{ appointment.home_phone }}</td>
 			</tr>
@@ -48,6 +54,10 @@
 				<td>{{ appointment.email }}</td>
 				<td class="text-right"><label>Mobile</label></td>
 				<td>{{ appointment.mobile }}</td>
+			</tr>
+			<tr >
+				<td class="text-right"><label>Excess</label></td>
+				<td>{{ appointment.excess }}</td>
 			</tr>
 			<tr >
 				<td class="text-right"><label>Notes</label></td>
