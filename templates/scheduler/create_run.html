@@ -23,7 +23,7 @@
 							<select class="input-sm form-control" ng-click="checkParentAppointments();" ng-model="job.appointment_id"  ng-options="appointment.id as (appointment.branch.description + ' - ' +  appointment.product.description +' ('+appointment.id +')' ) for appointment in appointments"></select>
 						</p>
 					</td>
-					<td ng-if="isGemini()">
+					<td ng-if="SessionUser.isFromGemini()">
 						<select class="input-sm form-control" ng-model="job.job_type">
 							<option value="D">Delivery</option>
 							<option value="C">Collection</option>
