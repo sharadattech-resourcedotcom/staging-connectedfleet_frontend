@@ -1,35 +1,54 @@
 <form method="get" class="form-horizontal">
 	<div class="col-md-12 alert alert-danger" ng-show="errors != ''">{{ errors }}</div> 
 	<div class="col-md-12 alert alert-success" ng-show="success != ''">{{ success }}</div> 
-	<div class="clearfix"></div>					
-	<div class="form-group">
-    	<label class="col-sm-2 control-label">Branch<font color="FireBrick">*</font></label>
-        <div class="col-sm-10">
-        	<select id="selected_branch" class="form-control" ng-model="appointment.branch_id" ng-options="branch.id as branch.description for branch in appointmentPreData.branches" requiered></select>
-        </div>
-    </div>
+	<div class="clearfix"></div>
     <div class="hr-line-dashed"></div>   
-    <div class="form-group">
-    	<label class="col-sm-2 control-label">Insurance Company<font color="FireBrick">*</font></label>
-        <div class="col-sm-10">
-        	<select id="selected_insurance_company" class="form-control" ng-model="appointment.insurance_company_id" ng-options="insurance_company.id as insurance_company.name for insurance_company in appointmentPreData.insurance_companies" requiered></select>
+    <div ng-if="!clm">			
+    	<div class="form-group">
+        	<label class="col-sm-2 control-label">Branch<font color="FireBrick">*</font></label>
+            <div class="col-sm-10">
+            	<select id="selected_branch" class="form-control" ng-model="appointment.branch_id" ng-options="branch.id as branch.description for branch in appointmentPreData.branches" requiered></select>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>   
+        <div class="form-group">
+        	<label class="col-sm-2 control-label">Insurance Company<font color="FireBrick">*</font></label>
+            <div class="col-sm-10">
+            	<select id="selected_insurance_company" class="form-control" ng-model="appointment.insurance_company_id" ng-options="insurance_company.id as insurance_company.name for insurance_company in appointmentPreData.insurance_companies" requiered></select>
+            </div>
         </div>
     </div>
-    <div class="hr-line-dashed"></div>   
     <div class="form-group">
-    	<label class="col-sm-2 control-label">Product<font color="FireBrick">*</font></label>
+        <label class="col-sm-2 control-label">Product<font color="FireBrick">*</font></label>
         <div class="col-sm-10">
-        	<select id="selected_product" class="form-control" ng-model="appointment.product_id" ng-options="product.id as product.description for product in appointmentPreData.products" requiered></select>
+            <select id="selected_product" class="form-control" ng-model="appointment.product_id" ng-options="product.id as product.description for product in appointmentPreData.products" requiered></select>
         </div>
-    </div>
-    <div class="hr-line-dashed"></div>            
-    <div class="form-group">
-    	<label class="col-sm-2 control-label">Vehicle<font color="FireBrick">*</font></label>
-        <div class="col-sm-10">
-        	<select id="selected_vehicle" class="form-control" ng-model="appointment.vehicle_id" ng-options="vehicle.id as (vehicle.make_and_model+' ('+vehicle.registration+')') for vehicle in appointmentPreData.vehicles" requiered></select>
+    </div>  
+
+    <div class="form-group" ng-if="clm">
+        <label class="col-sm-2 control-label">Vehicle registration<font color="FireBrick">*</font></label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" name="city" ng-model="appointment.vehicle_registration">
         </div>
+        <label class="col-sm-2 control-label">Make<font color="FireBrick">*</font></label>
+        <div class="col-sm-2">
+            <input type="text" class="col-sm-2 form-control" name="city" ng-model="appointment.vehicle_make">
+        </div>
+        <label class="col-sm-2 control-label">Model<font color="FireBrick">*</font></label>
+        <div class="col-sm-2">
+        <input type="text" class="col-sm-2 form-control" name="city" ng-model="appointment.vehicle_model">
+        </div>
+       
     </div>
-    <div class="hr-line-dashed"></div>
+    <div class="hr-line-dashed"></div>    
+    <div class="form-group" ng-if="!clm">
+        <label class="col-sm-2 control-label">Vehicle<font color="FireBrick">*</font></label>
+         <div class="col-sm-10">
+            <select id="selected_vehicle" class="form-control" ng-model="appointment.vehicle_id" ng-options="vehicle.id as (vehicle.make_and_model+' ('+vehicle.registration+')') for vehicle in appointmentPreData.vehicles" requiered></select>
+        </div>
+            <div class="hr-line-dashed"></div>
+    </div>        
+
     <div class="form-group">
         <!-- <p ng-show="isGemini()" class="form-header">Delivery Address</p> -->
     	<label class="col-sm-2 control-label">City</label>
@@ -106,16 +125,18 @@
 
     <div class="hr-line-dashed"></div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">Claim Number</label>
+        <label class="col-sm-2 control-label">Reference Number</label>
         <div class="col-sm-4">
         	<input type="text" class="form-control" name="city" ng-model="appointment.claim_number">
         </div>
     </div>
     <div class="hr-line-dashed"></div>
     <div class="form-group">
-    	<label class="col-sm-2 control-label">Excess</label>
-        <div class="col-sm-4">
-        	<input type="text" class="form-control" name="city" ng-model="appointment.excess">
+        <div ng-if="!clm">
+        	<label class="col-sm-2 control-label">Excess</label>
+            <div class="col-sm-4">
+            	<input type="text" class="form-control" name="city" ng-model="appointment.excess">
+            </div>
         </div>
         <label class="col-sm-2 control-label">Home Phone</label>
         <div class="col-sm-4">

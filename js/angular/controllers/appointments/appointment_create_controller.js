@@ -4,6 +4,7 @@ ngApp.controller("AppointmentCreateController",function($scope, $location, $rout
     $scope.errors = '';
     $scope.appointment = {};
     $scope.secondAddress = SessionUser.isFromGemini();
+    $scope.clm = SessionUser.isFromCLM();
 
     $scope.resetForm = function() {
         $scope.searchForm = {registration: null, manufacturer_id: null, model_id: null, fleet_type: null, body_code: null, transmission: null, fuel_type: null, colour: null };

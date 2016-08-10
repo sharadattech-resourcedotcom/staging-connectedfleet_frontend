@@ -1,4 +1,4 @@
-ngApp.controller("AppointmentsListController",function($scope, $location, $routeParams, $timeout, Api, $filter, $controller){
+ngApp.controller("AppointmentsListController",function($scope, $location, $routeParams, $timeout, Api, SessionUser, $filter, $controller){
 
     $scope.appointments = [];
     $scope.searchForm = {branch_id: null, product_id: null, insurance_company_id: null, vehicle_id: null};
@@ -6,6 +6,7 @@ ngApp.controller("AppointmentsListController",function($scope, $location, $route
     $scope.pageSize = 100;
     $scope.success = '';
     $scope.errors = '';
+    $scope.clm = SessionUser.isFromCLM();
 
 
     $scope.resetForm = function() {
