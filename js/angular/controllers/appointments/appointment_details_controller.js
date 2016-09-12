@@ -1,8 +1,9 @@
-ngApp.controller("AppointmentDetailsController",function($scope, $location, $routeParams, $timeout, Api, $filter, $controller, SessionUser){
+ngApp.controller("AppointmentDetailsController",function($scope, $location, $routeParams, $timeout, Api, SessionUser, $filter, $controller, SessionUser){
 
 	$scope.success = '';
     $scope.errors = '';
     $scope.imgsrc = URLS.damage_item_src;
+    $scope.clm = SessionUser.isFromCLM();
 
     $scope.fetchDetails = function() {
         Api.fetch(URLS.appointment_details.replace(':id', $routeParams.id), function (data, status) {

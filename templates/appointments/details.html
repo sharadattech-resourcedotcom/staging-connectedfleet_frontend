@@ -7,7 +7,7 @@
 				</td>
 				<td colspan="3"><h3>{{appointment.status}}</h3></td>
 			</tr>
-			<tr>
+			<tr ng-if="!clm">
 				<td class="text-right"><label>Branch</label></td>
 				<td>{{ appointment.branch.description }}</td>
 				<td class="text-right"><label>Insurance Company</label></td>
@@ -38,7 +38,7 @@
 				<td></td><td></td>
 			</tr>
 			<tr>
-				<td class="text-right"><label>Claim Number</label></td>
+				<td class="text-right"><label>Reference Number</label></td>
 				<td>{{ appointment.claim_number }}</td>
 				<td class="text-right"><label>Home phone</label></td>
 				<td>{{ appointment.home_phone }}</td>
@@ -55,7 +55,7 @@
 				<td class="text-right"><label>Mobile</label></td>
 				<td>{{ appointment.mobile }}</td>
 			</tr>
-			<tr >
+			<tr ng-if="!clm">
 				<td class="text-right"><label>Excess</label></td>
 				<td>{{ appointment.excess }}</td>
 			</tr>

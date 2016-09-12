@@ -15,7 +15,7 @@
 <div class="wrapper wrapper-content animated fadeInRight ecommerce" ifcan="see appointments list">
     <div>
         <div class="col-md-3 white-bg box-top-border p-10 saerch-form">            
-            <div class="col-md-12">
+            <div class="col-md-12" ng-if="!clm">
                 <div class="form-group">
                     <label>Branch</label>
 					<select id="selected_branch" class="input-sm form-control" ng-model="searchForm.branch_id" ng-options="branch.id as branch.description for branch in appointmentPreData.branches"><option value=""></option></select>
@@ -27,7 +27,7 @@
 					<select id="selected_product" class="input-sm form-control" ng-model="searchForm.product_id" ng-options="product.id as product.description for product in appointmentPreData.products"><option value=""></option></select>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" ng-if="!clm">
                 <div class="form-group">
                     <label>Inurance Company</label>
 					<select id="selected_insurance_company" class="input-sm form-control" ng-model="searchForm.insurance_company_id" ng-options="insurance_company.id as insurance_company.name for insurance_company in appointmentPreData.insurance_companies"><option value=""> </option></select>
@@ -35,8 +35,8 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>Vehicle</label>
-					<select id="selected_vehicle" class="input-sm form-control" ng-model="searchForm.vehicle_id" ng-options="vehicle.id as (vehicle.make_and_model+' ('+vehicle.registration+')') for vehicle in appointmentPreData.vehicles"><option value=""></option></select>
+                    <label>Vehicle Registration</label>
+					<input type="text" class="input-sm form-control" ng-model="searchForm.vehicle_registration"/>
                 </div>
             </div>            
             <div class="col-md-12 no-padding">
@@ -52,9 +52,9 @@
                 	<table class="table table-striped table-hover">
 						<thead>
 							<th>Id</th>
-							<th>Branch</th>
+							<th ng-if="!clm">Branch</th>
 							<th>Product</th>
-							<th>Insurance Company</th>
+							<th ng-if="!clm">Insurance Company</th>
 							<th>Vehicle</th>
                             <th>Status</th>
 							<th>Action</th>
@@ -62,9 +62,9 @@
 						<tbody>
 							<tr ng-repeat="a in appointments " total-items="totalItems" current-page="currentPage">
 								<td>{{ a.id }}</td>
-								<td>{{ a.branch.description }}</td>
+								<td ng-if="!clm">{{ a.branch.description }}</td>
 								<td>{{ a.product.description }}</td>
-								<td>{{ a.insurance_company.name }}</td>
+								<td ng-if="!clm">{{ a.insurance_company.name }}</td>
 								<td>{{ a.vehicle_info }}</td>
                                 <td>{{ a.status }}</td>
 								<td><a ng-href="#/appointments/{{ a.id }}/details"><i class="fa fa-edit"></i></a></td>

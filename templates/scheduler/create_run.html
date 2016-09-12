@@ -20,7 +20,7 @@
 				<tr ng-repeat="job in newJobs track by $index" class="job-row">
 					<td class="col-md-4">					
 						<p>
-							<select class="input-sm form-control" ng-click="checkParentAppointments();" ng-model="job.appointment_id"  ng-options="appointment.id as (appointment.branch.description + ' - ' +  appointment.product.description +' ('+appointment.id +')' ) for appointment in appointments"></select>
+							<select class="input-sm form-control" ng-click="checkParentAppointments();" ng-model="job.appointment_id"  ng-options="appointment.id as appointment.description for appointment in appointments"></select>
 						</p>
 					</td>
 					<td ng-if="SessionUser.isFromGemini()">
