@@ -23,6 +23,7 @@
                 	<!-- <li ng-class="getClass('/details')"><a ng-href="#/vehicles/{{ vehicle.id }}/details">Overview</a></li> -->
                 	<li ifcan="update vehicles" ng-class="getClass('/edit')"><a ng-href="#/vehicles/{{ vehicle.id }}/edit">Edit</a></li>
                     <li ifcant="update vehicles" ng-class="getClass('/edit')"><a ng-href="#/vehicles/{{ vehicle.id }}/details">Details</a></li>
+                    <li ng-class="getClass('/trips')"><a ng-href="#/vehicles/{{ vehicle.id }}/trips">Trips</a></li>
                 	<li ifcan="see inspections" ng-class="getClass('/inspections')"><a ng-href="#/vehicles/{{ vehicle.id }}/inspections">Inspections</a></li>
                 	<li ifcan="see appointments" ng-class="getClass('/appointments')"><a ng-href="#/vehicles/{{ vehicle.id }}/appointments">Appointments</a></li>
                    <!--  <li ng-class="getClass('/activities')"><a >Activities</a></li> -->
