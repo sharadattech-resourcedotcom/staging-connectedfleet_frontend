@@ -67,6 +67,13 @@ ngApp.factory('SessionUser', function ($location) {
         return false;
     };
 
+     var isFromEasidirve = function() {
+        if (getItem("companyId") == 34) {
+            return true;
+        }
+        return false;
+    };
+
     var isFromGemini = function() {
         if (getItem("companyId") == 35 || getItem("companyId") == 8) {
             return true;
@@ -102,6 +109,7 @@ ngApp.factory('SessionUser', function ($location) {
      isFromPhotoMe: isFromPhotoMe,
      isFromCLM: isFromCLM,
      isFromGemini: isFromGemini,
+     isFromEasidirve: isFromEasidirve,
      companyAbbrev: companyAbbrev
     };
 });

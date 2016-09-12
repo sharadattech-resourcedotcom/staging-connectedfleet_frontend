@@ -7,17 +7,15 @@ ngApp.controller("AutoViewController",function($scope, $http, Api, $location, $t
         new google.maps.Point(0,0),
         new google.maps.Point(16, 16)
     );
-	if (SessionUser.isFromPhotoMe()) {
-		var icons = [];
-		for (i = 0; i <= 7; i++) { 
-		    icons[i] = new google.maps.MarkerImage(
-				        "images/icons/marker" + String(i) + ".png",
-				        new google.maps.Size(12, 12),
-				        new google.maps.Point(0,0),
-				        new google.maps.Point(16, 16)
-				    );
-		}
-	};
+	var icons = [];
+	for (i = 0; i <= 7; i++) { 
+	    icons[i] = new google.maps.MarkerImage(
+			        "images/icons/marker" + String(i) + ".png",
+			        new google.maps.Size(12, 12),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(16, 16)
+			    );
+	}
 	
 	$scope.searchQuery = '';
 	$scope.markers = [];
@@ -116,7 +114,7 @@ ngApp.controller("AutoViewController",function($scope, $http, Api, $location, $t
 		var icon = defaultIcon;
 		angular.forEach($scope.drivers, function(d){
 			d.marker = null;
-			if (SessionUser.isFromPhotoMe()) {
+			if (SessionUser.isFromPhotoMe() || SessionUser.isFromEasidirve()) {
 				icon = icons[d.marker_type];
 			}
 
