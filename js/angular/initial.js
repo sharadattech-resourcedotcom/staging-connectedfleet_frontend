@@ -58,6 +58,7 @@ ngApp.config(
         .when('/vehicles', 'vehicles_list')
         .when('/vehicles/:id/details', 'vehicle.edit')
         .when('/vehicles/:id/edit', 'vehicle.edit')
+        .when('/vehicles/:id/trips', 'vehicle.trips')
         .when('/vehicles/:id/appointments', 'vehicle.appointments')
         .when('/vehicles/:id/inspections', 'vehicle.inspections')
         .when('/vehicles/create', 'vehicle_create')
@@ -458,6 +459,14 @@ ngApp.config(
                             requiredPermissions: []
                           }
                         })
+                         .segment('trips', {
+                          templateUrl: 'templates/vehicles/trips.html',
+                          dependencies: ['id'],
+                          access: {
+                            requiredLogin: true,
+                            requiredPermissions: []
+                          }
+                        })
                         .segment('appointments', {
                           templateUrl: 'templates/vehicles/appointments.html',
                           dependencies: ['id'],
@@ -685,6 +694,7 @@ var URLS = {
   vehicle_update: BACKEND_HOST+'/vehicles/update',
   vehicle_details: BACKEND_HOST+'/vehicles/:id/details',
   fetch_vehicles_pre_data: BACKEND_HOST+'/vehicles/pre_data',
+  fetchVehicleTrips: BACKEND_HOST+'/vehicles/vehicle_trips',
 
   appointments_list: BACKEND_HOST+'/appointments/list',
   appointment_create: BACKEND_HOST+'/appointments/create',

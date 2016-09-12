@@ -6,6 +6,7 @@ ngApp.controller("VehicleDetailsController",function($scope, $location, $routePa
     $scope.manufacturer_edit = false;
     $scope.model_edit = false;
     $scope.can_update = (Auth.authorize(true, ['update vehicles']) == 1)?true:false;
+    $scope.vehicle = {id: $routeParams.id};
 
     $scope.unknownManufacturer = function(){
         if($scope.vehicle.manufacturer.description == 'Unknown'){
@@ -78,7 +79,6 @@ ngApp.controller("VehicleDetailsController",function($scope, $location, $routePa
             return '';
         }
     }
-
     $scope.fetchVehiclePreData();
     $scope.fetchInspections();
     $scope.fetchAppointments();
