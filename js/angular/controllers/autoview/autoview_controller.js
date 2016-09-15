@@ -94,14 +94,12 @@ ngApp.controller("AutoViewController",function($scope, $http, Api, $location, $t
 	};
 
 	$scope.formatLastSyncTime = function(d) {
-		var date = new Date();
-    	var localOffset = (-1) * date.getTimezoneOffset();
 		if (d.last_sync == -1) {
 			d.last_sync_formatted = 'never';
 		} else if (d.last_sync > 60) {
-			d.last_sync_formatted = Math.round((d.last_sync+localOffset) / 60) + 'h';
+			d.last_sync_formatted = Math.round((d.last_sync) / 60) + 'h';
 		} else {
-			d.last_sync_formatted = Math.round((d.last_sync+localOffset)) + 'm';
+			d.last_sync_formatted = Math.round((d.last_sync)) + 'm';
 		}
 	};
 
