@@ -29,3 +29,12 @@ ngApp.filter('utcdatetime', function() {
         return moment(date).format('DD/MM/YYYY HH:mm');
     };
 });
+
+ngApp.filter('datetime', function() {
+    return function(date) {
+        if (date == null || date == '') return '';
+        var d = new Date();
+        date = new Date(new Date(date).getTime());
+        return moment.utc(date).format('DD/MM/YYYY HH:mm');
+    };
+});
