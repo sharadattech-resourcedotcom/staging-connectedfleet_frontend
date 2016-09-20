@@ -22,8 +22,8 @@
             <td>
                 <a href="#/vehicles/{{ j.appointment_info.vehicle_id }}/details">{{ j.appointment_info.vehicle }}</a>
             </td>
-            <td>{{ j.start_date | utcdatetime }}</td>
-            <td>{{ j.end_date | utcdatetime }}</td>
+            <td>{{ j.start_date | datetime }}</td>
+            <td>{{ j.end_date | datetime }}</td>
             <td>{{ j.appointment_info.address}}</td>
             <td class="text-center"><a ng-click="deleteJob(j)" ng-show="j.is_done == false"><i class="fa fa-trash"></i></a></td>
         </tr>
