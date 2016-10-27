@@ -1,85 +1,89 @@
-<div class="panel panel-default">
- <div class="col-sm-4 pull-right no-padding">
-    <a class="btn btn-sm pdf-btn btn-primary pull-right" href="{{ download_path }}" target="_blank">
-    	<i class="fa fa-file-pdf-o"></i> PDF
-    </a>
-</div>
-	<div class="panel-heading">
-		<b><span style="font-size: 11px;">{{ inspection.created_at | utcdatetime }}</span></b>
+<div ng-if="inspection.inspection_type == 'MobileInspection'">
+	<div class="panel panel-default">
+	 <div class="col-sm-4 pull-right no-padding">
+	    <a class="btn btn-sm pdf-btn btn-primary pull-right" href="{{ download_path }}" target="_blank">
+	    	<i class="fa fa-file-pdf-o"></i> PDF
+	    </a>
 	</div>
-	<div class="panel-body">
-		<div class="col-sm-12">
-			<div class="col-md-6">
-				<p ng-show="inspection.driver.name != ''"><b>Driver:</b> {{ inspection.driver_full_name }}</p>
-				<hr />
-				<p ng-show="inspection.customer_name != ''"><b>Customer:</b> {{ inspection.customer_name }}</p>
-				<hr />
-				<p ng-show="inspection.appointment_id != ''"><b>Appointment ID:</b><a ng-href="#/appointments/{{inspection.appointment_id}}/details"> {{ inspection.appointment_id }}</a></p>
-				<hr />
-				
-				<p ng-show="inspection.ref_number != ''"><b>REF Number:</b> {{ inspection.ref_number }}</p>
-				<hr ng-show="inspection.ref_number != ''">
-
-				<p ng-show="inspection.job_type != ''"><b>Job Type:</b> {{ inspection.job_type }}</p>
-				<hr ng-show="inspection.job_type != ''">
-
-				<p ng-show="inspection.notes != ''"><b>Notes:</b> {{ inspection.notes }}</p>
-				<hr ng-show="inspection.notes != ''">
-
-				<p ng-show="inspection.mileage != 0 && inspection.mileage != null"><b>Mileage:</b> {{ inspection.mileage }}</p>
-				<hr ng-show="inspection.mileage != 0 && inspection.mileage != null">
-			</div>
-			<div class="col-md-6">
-				<p ng-show="inspection.home_number && inspection.home_number != ''"><b>Home Name/Number:</b> {{ inspection.home_number }}</p>
-				<hr ng-show="inspection.home_number && inspection.home_number != ''" />
-
-				<p ng-show="inspection.address_line_1 && inspection.address_line_1 != ''"><b>Address line 1:</b>{{ inspection.address_line_1 }}</a></p>
-				<hr ng-show="inspection.address_line_1 && inspection.address_line_1 != ''">
-
-				<p ng-show="inspection.address_line_2 && inspection.address_line_2 != ''"><b>Address line 2:</b> {{ inspection.address_line_2 }}</p>
-				<hr ng-show="inspection.address_line_2 && inspection.address_line_2 != ''">
-				
-				<p ng-show="inspection.city && inspection.city != ''"><b>City:</b> {{ inspection.city }}</p>
-				<hr ng-show="inspection.city && inspection.city != ''">
-
-				<p ng-show="inspection.postcode && inspection.postcode != ''"><b>Postcode:</b> {{ inspection.postcode }}</p>
-				<hr ng-show="inspection.postcode && inspection.postcode != ''">
-			</div>
-			</div>
+		<div class="panel-heading">
+			<b><span style="font-size: 11px;">{{ inspection.created_at | utcdatetime }}</span></b>
+		</div>
+		<div class="panel-body">
 			<div class="col-sm-12">
-			<p ng-show="inspection.loose_item != ''"><b>Loose Items:</b> {{ inspection.loose_items }}</p>
-			<hr ng-show="inspection.questions != ''">
-			<p ng-show="inspection.questions != ''"><b>Questions:</b> {{ inspection.questions }}</p>
-			<hr ng-show="inspection.terms_file_name">
-			<div ng-show="inspection.terms_file_name">
-				<p><b>Terms file:</b></p>
-				<a ng-href="{{termsrc + inspection.terms_file_name }}" target="parent">
-					<img src="{{termsrc + inspection.terms_file_name }}" width="400"/>
-				</a>
-			</div>
-			<hr ng-show="inspection.damageItems.length > 0">
-			<p ng-show="inspection.damageItems.length > 0"><b>Damages:</b></p>
-			<div class="col-md-12" ng-show="inspection.damageItems.length > 0 && inspection.damage_collections.length == 0">
-				<table class="table">
-					<tr ng-repeat="d in inspection.damageItems track by $index" ng-if="$index%2==0" total-items="totalItems" current-page="currentPage">
-						<td class="col-md-5" ng-if="d.file_path">
-							<p>Description: {{ d.description }}</p>
-							<a ng-href="{{imgsrc + d.file_path }}" target="parent">
-								<img src="{{imgsrc + d.file_path }}" width="300" height="300"/>
-							</a>
-						</td>
-						<td class="col-md-1"></td>
-						<td ng-if="inspection.damageItems[$index+1].file_path" class="col-md-5">
-							<p>Description: {{ inspection.damageItems[$index+1].description }}</p>
-							<a ng-href="{{imgsrc + inspection.damageItems[$index+1].file_path }}"><img src="{{imgsrc + inspection.damageItems[$index+1].file_path }}" width="300" height="300"/></a>
-						</td>
-					</tr>
-	            </table>
-			</div>
-			<div ng-if="inspection.damage_collections.length > 0">
-				<damage-collections collections="inspection.damage_collections"></damage-collections>
-			</div>
-		</div>					
+				<div class="col-md-6">
+					<p ng-show="inspection.driver.name != ''"><b>Driver:</b> {{ inspection.driver_full_name }}</p>
+					<hr />
+					<p ng-show="inspection.customer_name != ''"><b>Customer:</b> {{ inspection.customer_name }}</p>
+					<hr />
+					<p ng-show="inspection.appointment_id != ''"><b>Appointment ID:</b><a ng-href="#/appointments/{{inspection.appointment_id}}/details"> {{ inspection.appointment_id }}</a></p>
+					<hr />
+					
+					<p ng-show="inspection.ref_number != ''"><b>REF Number:</b> {{ inspection.ref_number }}</p>
+					<hr ng-show="inspection.ref_number != ''">
+
+					<p ng-show="inspection.job_type != ''"><b>Job Type:</b> {{ inspection.job_type }}</p>
+					<hr ng-show="inspection.job_type != ''">
+
+					<p ng-show="inspection.notes != ''"><b>Notes:</b> {{ inspection.notes }}</p>
+					<hr ng-show="inspection.notes != ''">
+
+					<p ng-show="inspection.mileage != 0 && inspection.mileage != null"><b>Mileage:</b> {{ inspection.mileage }}</p>
+					<hr ng-show="inspection.mileage != 0 && inspection.mileage != null">
+				</div>
+				<div class="col-md-6">
+					<p ng-show="inspection.home_number && inspection.home_number != ''"><b>Home Name/Number:</b> {{ inspection.home_number }}</p>
+					<hr ng-show="inspection.home_number && inspection.home_number != ''" />
+
+					<p ng-show="inspection.address_line_1 && inspection.address_line_1 != ''"><b>Address line 1:</b>{{ inspection.address_line_1 }}</a></p>
+					<hr ng-show="inspection.address_line_1 && inspection.address_line_1 != ''">
+
+					<p ng-show="inspection.address_line_2 && inspection.address_line_2 != ''"><b>Address line 2:</b> {{ inspection.address_line_2 }}</p>
+					<hr ng-show="inspection.address_line_2 && inspection.address_line_2 != ''">
+					
+					<p ng-show="inspection.city && inspection.city != ''"><b>City:</b> {{ inspection.city }}</p>
+					<hr ng-show="inspection.city && inspection.city != ''">
+
+					<p ng-show="inspection.postcode && inspection.postcode != ''"><b>Postcode:</b> {{ inspection.postcode }}</p>
+					<hr ng-show="inspection.postcode && inspection.postcode != ''">
+				</div>
+				</div>
+				<div class="col-sm-12">
+				<p ng-show="inspection.loose_item != ''"><b>Loose Items:</b> {{ inspection.loose_items }}</p>
+				<hr ng-show="inspection.questions != ''">
+				<p ng-show="inspection.questions != ''"><b>Questions:</b> {{ inspection.questions }}</p>
+				<hr ng-show="inspection.terms_file_name">
+				<div ng-show="inspection.terms_file_name">
+					<p><b>Terms file:</b></p>
+					<a ng-href="{{termsrc + inspection.terms_file_name }}" target="parent">
+						<img src="{{termsrc + inspection.terms_file_name }}" width="400"/>
+					</a>
+				</div>
+				<hr ng-show="inspection.damageItems.length > 0">
+				<p ng-show="inspection.damageItems.length > 0"><b>Damages:</b></p>
+				<div class="col-md-12" ng-show="inspection.damageItems.length > 0 && inspection.damage_collections.length == 0">
+					<table class="table">
+						<tr ng-repeat="d in inspection.damageItems track by $index" ng-if="$index%2==0" total-items="totalItems" current-page="currentPage">
+							<td class="col-md-5" ng-if="d.file_path">
+								<p>Description: {{ d.description }}</p>
+								<a ng-href="{{imgsrc + d.file_path }}" target="parent">
+									<img src="{{imgsrc + d.file_path }}" width="300" height="300"/>
+								</a>
+							</td>
+							<td class="col-md-1"></td>
+							<td ng-if="inspection.damageItems[$index+1].file_path" class="col-md-5">
+								<p>Description: {{ inspection.damageItems[$index+1].description }}</p>
+								<a ng-href="{{imgsrc + inspection.damageItems[$index+1].file_path }}"><img src="{{imgsrc + inspection.damageItems[$index+1].file_path }}" width="300" height="300"/></a>
+							</td>
+						</tr>
+		            </table>
+				</div>
+				<div ng-if="inspection.damage_collections.length > 0">
+					<damage-collections collections="inspection.damage_collections"></damage-collections>
+				</div>
+			</div>					
+		</div>
 	</div>
 </div>
-
+<div ng-if="inspection.inspection_type == 'EstimatorInspection'">
+	<estimator-inspection inspection="inspection"></estimator-inspection>
+</div>
