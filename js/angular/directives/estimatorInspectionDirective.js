@@ -1,4 +1,4 @@
-ngApp.directive('estimatorInspection', function($window, $uibModal){
+ngApp.directive('estimatorInspection', function($window, $uibModal, SessionUser){
 	return {
 		restrict: 'E',
 		scope: {
@@ -11,6 +11,8 @@ ngApp.directive('estimatorInspection', function($window, $uibModal){
 			scope.imgsrc = URLS.damage_item_src;
 			scope.checklist = []
 			scope.totalCost = {'cost': 0};
+			scope.download_path = BACKEND_HOST + "/inspections/download_estimator_inspection_pdf?inspection_id="+scope.inspection.id+"&token="+SessionUser.getItem("access_token")+"&";
+
 
 			_.each(scope.inspection.damage_collections, function(collection){
 				scope.totalCost.cost += collection.repair_price;
