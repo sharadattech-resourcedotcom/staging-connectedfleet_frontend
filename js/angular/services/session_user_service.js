@@ -89,7 +89,7 @@ ngApp.factory('SessionUser', function ($location) {
         } else if (getItem("companyId") == 9) {
             return "ageas";
         } else if (getItem("companyId") == 13) {
-            return "lcvr";
+            return "clm";
         } else if (getItem("companyId") == 2) {
             return "av";
         } else if (getItem("companyId") == 34) {
