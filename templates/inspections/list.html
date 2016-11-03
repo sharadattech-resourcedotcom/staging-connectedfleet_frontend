@@ -30,13 +30,13 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="i in inspections | filter: filter " total-items="totalItems" current-page="currentPage">
-							<td>{{ i.id }}</td>
+							<td>{{ i.inspection_type == 'EstimatorInspection' ? 'E' + i.id.toString() : 'M' + i.id.toString() }}</td>
 							<td>{{ i.vehicle_info }}</td>
 							<td>{{ i.driver_full_name }}</td>
                             <td>{{ i.appointment_id }}</td>
 							<!-- <td>{{ i.job_number }}</td> -->
 							<td>{{ i.created_at | utcdate }}</td>
-							<td><a ng-href="#/inspections/{{ i.id }}/details"><i class="fa fa-edit"></i></a></td>
+							<td><a ng-href="#/inspections/{{ i.inspection_type == 'EstimatorInspection' ? 'E' : 'M' }}/{{ i.id }}/details"><i class="fa fa-edit"></i></a></td>
 						</tr>
 					</tbody>
 				</table>

@@ -68,9 +68,9 @@ ngApp.config(
         .when('/appointments/:id/edit', 'appointment.edit')
         .when('/appointments/:id/inspections', 'appointment.inspections')
         .when('/scheduler', 'scheduler.jobs.create_run')
-        .when('/inspections/:id', 'inspection.details')
-        .when('/inspections/:id/details', 'inspection.details')
-        .when('/inspections/:id/edit', 'inspection.edit')
+        .when('/inspections/:type/:id', 'inspection.details')
+        .when('/inspections/:type/:id/details', 'inspection.details')
+        .when('/inspections/:type/:id/edit', 'inspection.edit')
         .when('/inspections', 'inspections_list')
 
         .segment('sign-in', {
@@ -702,7 +702,7 @@ var URLS = {
   appointment_details: BACKEND_HOST+'/appointments/:id/details',
   fetch_appointments_pre_data: BACKEND_HOST+'/appointments/pre_data',
   inspections_list: BACKEND_HOST+'/inspections/list',
-  inspection_details: BACKEND_HOST+'/inspections/:id',
+  inspection_details: BACKEND_HOST+'/inspections/:type/:id',
 
   saveNewJobs: BACKEND_HOST+'/scheduler/save_new_jobs',
   fetchSchedulerDataToAllocate: BACKEND_HOST+'/scheduler/fetch_data_to_allocate',

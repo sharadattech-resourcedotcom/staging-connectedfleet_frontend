@@ -1,0 +1,84 @@
+<div>
+	 <div class="col-sm-4 pull-right no-padding">
+	    <a class="btn btn-sm pdf-btn btn-primary pull-right" href="{{ download_path }}" target="_blank">
+	    	<i class="fa fa-file-pdf-o"></i> PDF
+	    </a>
+	</div>
+	<h1 style="margin-left:33%;margin-bottom:30px">LVCR {{inspection.vehicle_type}} Estimate Sheet</h1>
+	 <div class="ibox-content col-md-6">
+            <div class="table-responsive">
+                <table class="table">
+					<tr>
+						<td><b>Registration No.</b></td>
+						<td>{{inspection.vehicle.registration}}</td>
+						<td><b>Chassis No.</b></td>
+						<td>{{inspection.chassis_no}}</td>
+					</tr>
+					<tr>
+						<td><b>Make</b></td>
+						<td>{{inspection.vehicle_make}}</td>
+						<td><b>Colour</b></td>
+						<td>{{inspection.color}}</td>
+					</tr>
+					<tr>
+						<td><b>Model</b></td>
+						<td>{{inspection.vehicle_model}}</td>
+						<td><b>Mileage</b></td>
+						<td>{{inspection.mileage}}</td>
+					</tr>
+					<tr ng-repeat="check in checklist" ng-if="$index % 2 == 0">
+				        <td><b>{{check[0]}}</b></td>
+						<td>{{check[1] ? "Yes" : "No"}}</td>
+						<td><b>{{checklist[$index+1][0]}}</b></td>
+						<td>{{checklist[$index+1][1] ? "Yes" : "No"}}</td>
+						
+			      	</tr>
+			      	<tr ng-if="inspection.vehicle_type == 'VAN'">
+			      		<td><b>Ply Lining Condition</b></td>
+			      		<td>{{inspection.ply_lining_condition}}</td>
+			      	</tr>
+                </table>
+            </div>
+
+            <div class="table-responsive" ng-if="inspection.vehicle_type == 'VAN'">
+                <table class="table">
+					<tr>
+						<td rowspan="2" style="text-align:center;vertical-align: middle;"><b><h3>Tyres</h3></b></td>
+						<td><b>NSF</b></td>
+						<td>{{inspection.nsf}}mm</td>
+						<td><b>NSR</b></td>
+						<td>{{inspection.nsr}}mm</td>
+					</tr>
+					<tr>
+						<td><b>OSF</b></td>
+						<td>{{inspection.osf}}mm</td>
+						<td><b>OSR</b></td>
+						<td>{{inspection.osr}}mm</td>
+					</tr>
+                </table>
+            </div>
+        </div>
+	<canvas style="margin-left:15px;" id="exterior"></canvas>
+     <div class="table-responsive">
+        <table class="table">
+			<tr ng-repeat="collection in inspection.damage_collections">
+				<td><b><h2>{{$index + 1}}</h2></b></td>
+				<td>
+					<p><h3><b>Description: </b></h3> {{collection.description}}</p>
+					<p><h3><b>Repair Method: </b></h3> {{collection.repair_method}}</p>
+					<p><h3><b>Price: </b></h3> {{collection.repair_price}} £</p>
+				</td>
+				<td>
+					<div ng-repeat="damage in collection.damage_items">
+						<img width="300" height="300" src="{{imgsrc + damage.file_path}}" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<h3><b>Total Cost:</b> {{totalCost.cost}} £</h3>
+				</td>
+			</tr>
+        </table>
+    </div>
+</div>
