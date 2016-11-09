@@ -7,28 +7,26 @@
 	            </div>
 	        </div>
 	        <div class="table-responsive">
-	            <table class="table table-striped table-hover">
-	                <thead>
+	           <table class="table table-striped table-hover">
+					<thead>
 						<th>Id</th>
-						<th>Appointment Id</th>
-						<!-- <th>Job number</th> -->
 						<th>Vehicle</th>
-						<th>Loose items</th>
+                        <th>Appointment Id</th>
+						<!-- <th>Job number</th> -->
 						<th>Date</th>
 						<th>Action</th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="i in inspections | filter: filter" total-items="totalItems" current-page="currentPage">
-							<td>{{ i.id }}</td>
-							<td>{{ i.appointment_id }}</td>
+						<tr ng-repeat="i in inspections | filter: filter " total-items="totalItems" current-page="currentPage">
+							<td>{{ i.inspection_type == 'EstimatorInspection' ? 'E' + i.id.toString() : 'M' + i.id.toString() }}</td>
+							<td>{{ i.vehicle_info }}</td>
+                            <td>{{ i.appointment_id }}</td>
 							<!-- <td>{{ i.job_number }}</td> -->
-							<td>{{ i.vehicle_info }}
-							<td>{{ i.loose_items }}</td>
-							<td>{{ i.created_at | utcdatetime }}</td>
-							<td><a ng-href="#/inspections/{{ i.id }}/details"><i class="fa fa-edit"></i></a></td>
+							<td>{{ i.created_at | utcdate }}</td>
+							<td><a ng-href="#/inspections/{{ i.inspection_type == 'EstimatorInspection' ? 'E' : 'M' }}/{{ i.id }}/details"><i class="fa fa-edit"></i></a></td>
 						</tr>
 					</tbody>
-	            </table>
+				</table>
 	        </div>
 	    </div>
     </div>
